@@ -58,7 +58,7 @@ class Controller{
 	{
 		if(!isset($_SESSION['csm']['id']))
 		{
-			header('Location: /csmnew/public/login');
+			header('Location: /csm/public/login');
 		}
 	}
 
@@ -73,7 +73,7 @@ class Controller{
 		{
 			if(!isset($_SESSION['csm']['id']))
 			{
-				header('Location: /csmnew/public/login');
+				header('Location: /csm/public/login');
 			}
 		}
 		return $role;

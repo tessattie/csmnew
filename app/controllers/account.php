@@ -65,11 +65,11 @@ class account extends Controller{
 		$this->users->deleteUser($userId);
 		if($_SESSION['csm']['id'] == $userId)
 		{
-			header('Location: /csmnew/public/login');
+			header('Location: /csm/public/login');
 		}
 		else
 		{
-			header('Location: /csmnew/public/account');
+			header('Location: /csm/public/account');
 		}
 	}
 
@@ -92,11 +92,11 @@ class account extends Controller{
 		$this->users->setPassword($userId, $password);
 		if($_SESSION['csm']['id'] == $userId)
 		{
-			header('Location: /csmnew/public/login');
+			header('Location: /csm/public/login');
 		}
 		else
 		{
-			header('Location: /csmnew/public/account');
+			header('Location: /csm/public/account');
 		}
 	}
 
@@ -113,16 +113,16 @@ class account extends Controller{
 					$this->users->setPassword($_SESSION['csm']['id'], sha1($_POST['newpass']));
 					session_unset();
 					session_destroy();
-					header('Location: /csmnew/public/login');
+					header('Location: /csm/public/login');
 				}
 				else
 				{
-					header('Location: /csmnew/public/account');
+					header('Location: /csm/public/account');
 				}
 			}
 			else
 			{
-				header('Location: /csmnew/public/account/');
+				header('Location: /csm/public/account/');
 			}
 		}
 	}

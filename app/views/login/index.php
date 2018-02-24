@@ -4,7 +4,7 @@
 	<div class="row signinrow">
 		<div class="col-md-4 col-md-offset-4">
 			
-			<form class="form-signin" action = '/csmnew/public/login' method = "POST">
+			<form class="form-signin" action = '/csm/public/login' method = "POST">
 			    <h2 class="form-signin-heading">Please sign in</h2>
 			    <?php  
 			    	if(isset($_COOKIE['username'])) 

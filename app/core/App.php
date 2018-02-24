@@ -65,7 +65,7 @@ class App{
 				
 			}else{
 				unset($_SESSION);
-				header('Location: /csmnew/public/login');
+				header('Location: /csm/public/login');
 			}
 		}
 

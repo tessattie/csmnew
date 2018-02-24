@@ -487,7 +487,7 @@ jQuery(function($){
 	$('#keywordInput').change(function(){
 		var keyword = $(this).val();
 		$.ajax({
-	       url : '/csmnew/public/home/setKeyword',
+	       url : '/csm/public/home/setKeyword',
 	       type : 'POST',
 	       data : {key : keyword},
 	       dataType : 'html',

@@ -78,7 +78,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
                         if($data["qt"][$l] == "UPC")
                         {
                             echo "<td class='" . $data["qt"][$l] . " " . $onhandClass . "'>
-                            <a href = '/csmnew/public/home/UPCPriceCompare_url/" . $data['report'][$i][$data["qt"][$l]] . "'>" . $data['report'][$i][$data["qt"][$l]] . "
+                            <a href = '/csm/public/home/UPCPriceCompare_url/" . $data['report'][$i][$data["qt"][$l]] . "'>" . $data['report'][$i][$data["qt"][$l]] . "
                             </a></td>";
                         }
                         else
@@ -86,7 +86,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
                             if($data["qt"][$l] == "CertCode")
                             {
                                 echo "<td class='" . $data["qt"][$l] . "'>
-                                <a href = '/csmnew/public/home/vendorItemCode_url/" . str_replace(' ', '', $data['report'][$i][$data["qt"][$l]]) . "'>" . str_replace(' ', '', $data['report'][$i][$data["qt"][$l]]) . "</a></td>";
+                                <a href = '/csm/public/home/vendorItemCode_url/" . str_replace(' ', '', $data['report'][$i][$data["qt"][$l]]) . "'>" . str_replace(' ', '', $data['report'][$i][$data["qt"][$l]]) . "</a></td>";
                             }
                             else
                             {
@@ -105,7 +105,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
 }
 else
 {
-	echo "<a href='/csmnew/public/home/'><p class='text-warning errortext'>THE REPORT DID NOT GENERATE ANY RESULTS. PLEASE CHECK THE UPC NUMBER. DID YOU ENTER THE RIGHT SALES DATES ?</p></a>";
+	echo "<a href='/csm/public/home/'><p class='text-warning errortext'>THE REPORT DID NOT GENERATE ANY RESULTS. PLEASE CHECK THE UPC NUMBER. DID YOU ENTER THE RIGHT SALES DATES ?</p></a>";
 }
 ?>
 </tbody>

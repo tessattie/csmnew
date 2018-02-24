@@ -12,7 +12,7 @@ class login extends Controller{
 	{
 		if(!empty($_SESSION['csm']['id']))
 		{
-			header('Location: /csmnew/public/home');
+			header('Location: /csm/public/home');
 		}
 		// csmreport51M
 		if(isset($_POST['submit']))
@@ -39,7 +39,7 @@ class login extends Controller{
 							}else{
 								$this->startUserSession($user);
 								$this->rememberUser($_POST);
-								header('Location: /csmnew/public/home');
+								header('Location: /csm/public/home');
 							}
 						}else{
 							$errorMessage = '<p class="bg-danger">This user does not have access to this application</p>';
@@ -60,7 +60,7 @@ class login extends Controller{
 						}else{
 							$this->startUserSession($user);
 							$this->rememberUser($_POST);
-							header('Location: /csmnew/public/home');
+							header('Location: /csm/public/home');
 						}
 					}
 				}

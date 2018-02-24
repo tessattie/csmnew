@@ -101,12 +101,12 @@ class home extends Controller{
 					}
 				}
 				if($condition == false){
-					header('Location:/csmnew/public/home');
+					header('Location:/csm/public/home');
 				}
 			}
 			$_POST['vendorNumber'] = $this->completeValue($_POST['vendorNumber'], 6);
 			$this->setDefaultDates($_POST['fromvendor'], $_POST['tovendor']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendor/" .$_POST['vendorNumber']. "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendor/" .$_POST['vendorNumber']. "/" . $this->from . "/" . $this->to;
 			$vendorReport = $this->brdata->get_vendorReport($_POST['vendorNumber'], $this->today, $_POST['fromvendor'], $_POST['tovendor']);
 			// var_dump($vendorReport);die();
 			if(!empty($vendorReport[0]))
@@ -129,7 +129,7 @@ class home extends Controller{
 		{
 			$_POST['limitedVendorNo'] = $this->completeValue($_POST['limitedVendorNo'], 6);
 			$this->setDefaultDates($_POST['fromlimitedVendorNo'], $_POST['tolimitedVendorNo']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/limitedVendor/" .$_POST['limitedVendorNo']. "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/limitedVendor/" .$_POST['limitedVendorNo']. "/" . $this->from . "/" . $this->to;
 			$vendorReport = $this->brdata->get_vendorReport($_POST['limitedVendorNo'], $this->today, $_POST['fromlimitedVendorNo'], $_POST['tolimitedVendorNo']);
 			// var_dump($vendorReport);die();
 			if(!empty($vendorReport[0]))
@@ -164,7 +164,7 @@ class home extends Controller{
 				
 			}
 			$this->setDefaultDates($_POST['mulfromsection'], $_POST['multosection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/multipleSections/".$exporturl . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/multipleSections/".$exporturl . "/" . $this->from . "/" . $this->to;
 			$sectionReport = $this->brdata->get_multipleSectionReport($sections, $this->today, $_POST['mulfromsection'], $_POST['multosection']);
 			if(!empty($sectionReport[0]))
 			{
@@ -201,7 +201,7 @@ class home extends Controller{
 				
 			}
 			$this->setDefaultDates($_POST['mulfromsectionneg'], $_POST['multosectionneg']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/multipleSectionsNeg/".$exporturl . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/multipleSectionsNeg/".$exporturl . "/" . $this->from . "/" . $this->to;
 			$sectionReport = $this->brdata->get_multipleSectionNegReport($sections, $this->today, $_POST['mulfromsectionneg'], $_POST['multosectionneg']);
 			if(!empty($sectionReport[0]))
 			{
@@ -241,7 +241,7 @@ class home extends Controller{
 		{
 			$_POST['upcReceivingNumber'] = $this->completeValue($_POST['upcReceivingNumber'], 15);
 			$this->setDefaultDates($_POST['fromReceivingupc'], $_POST['toReceivingupc']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/UPCReceivingHistory/".$_POST['upcReceivingNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/UPCReceivingHistory/".$_POST['upcReceivingNumber'] . "/" . $this->from . "/" . $this->to;
 			$receivingHistory = $this->brdata->get_upcReceivingHistory($_POST['upcReceivingNumber'], $this->today, $_POST['toReceivingupc'], $_POST['fromReceivingupc']);
 			// var_dump($receivingHistory);
 			if(!empty($receivingHistory[0]))
@@ -268,7 +268,7 @@ class home extends Controller{
 		{
 			$_POST['vendorNegNumber'] = $this->completeValue($_POST['vendorNegNumber'], 6);
 			$this->setDefaultDates($_POST['fromNegvendor'], $_POST['toNegvendor']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorNegative/".$_POST['vendorNegNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorNegative/".$_POST['vendorNegNumber'] . "/" . $this->from . "/" . $this->to;
 			$report = $this->brdata->get_vendorReport($_POST['vendorNegNumber'], $this->today, $_POST['fromNegvendor'], $_POST['toNegvendor']);
 			if(!empty($report[0]))
 			{
@@ -293,7 +293,7 @@ class home extends Controller{
 		{
 			$_POST['sectionMvtNumber'] = $this->completeValue($_POST['sectionMvtNumber'], 4);
 			$this->setDefaultDates($_POST['fromMvtsection'], $_POST['toMvtsection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/sectionMovement/".$_POST['sectionMvtNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/sectionMovement/".$_POST['sectionMvtNumber'] . "/" . $this->from . "/" . $this->to;
 			$sectionReport = $this->brdata->get_sectionReport($_POST['sectionMvtNumber'], $this->today, $_POST['fromMvtsection'], $_POST['toMvtsection']);
 			$report = array();
 			$j=0;
@@ -332,7 +332,7 @@ class home extends Controller{
 			"CASE COST", "UNIT PRICE", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE", "VDR NO", "VDR NAME");
 		$queryTitles = array("UPC", "CertCode", "Brand", "ItemDescription", "Pack", "SizeAlpha",
 			"CaseCost", "Retail", "unitPrice", "onhand", "lastReceiving", "lastReceivingDate", "sales", "tpr", "tprStart", "tprEnd", "VdrNo", "VdrName");
-		$this->exportURL = "/csmnew/public/phpExcelExport/specials/" . $this->from . "/" . $this->to;
+		$this->exportURL = "/csm/public/phpExcelExport/specials/" . $this->from . "/" . $this->to;
 		$specialReport = $this->brdata->get_specialReport($this->today, $this->from, $this->to);
 		$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, "tableID" => "report_result", "action" => "special", "reportType" => 'templateWithSectionOrder', "from" => $this->from, "to" => $this->to, "report" => $specialReport, "menu" => $this->userRole);
 		$this->renderView($data);
@@ -351,7 +351,7 @@ class home extends Controller{
 		{
 			$_POST['vendorMvtNumber'] = $this->completeValue($_POST['vendorMvtNumber'], 6);
 			$this->setDefaultDates($_POST['fromMvtvendor'], $_POST['toMvtvendor']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorMovement/".$_POST['vendorMvtNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorMovement/".$_POST['vendorMvtNumber'] . "/" . $this->from . "/" . $this->to;
 			$vendorReport = $this->brdata->get_vendorReport($_POST['vendorMvtNumber'], $this->today, $_POST['fromMvtvendor'], $_POST['toMvtvendor']);
 			$j=0;
 			$i=0;
@@ -392,7 +392,7 @@ class home extends Controller{
 		{
 			$_POST['vendorMvtNumber'] = $this->completeValue($_POST['dptMvtNumber'], 6);
 			$this->setDefaultDates($_POST['fromDptvendor'], $_POST['toDptvendor']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/departmentMovement/".$_POST['dptMvtNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/departmentMovement/".$_POST['dptMvtNumber'] . "/" . $this->from . "/" . $this->to;
 			$dptReport = $this->brdata->get_departmentReport($_POST['dptMvtNumber'], $this->today, $_POST['fromDptvendor'], $_POST['toDptvendor']);
 			$j=0;
 			$i=0;
@@ -439,7 +439,7 @@ class home extends Controller{
 			$_POST['svendorMvtNumber'] = $this->completeValue($_POST['svendorMvtNumber'], 6);
 			$_POST['sctvendorMvtNumber'] = $this->completeValue($_POST['sctvendorMvtNumber'], 4);
 			$this->setDefaultDates($_POST['fromvendorMvtSection'], $_POST['tovendorMvtSection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorSectionMovement/".$_POST['svendorMvtNumber'] . "/" . $_POST['sctvendorMvtNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorSectionMovement/".$_POST['svendorMvtNumber'] . "/" . $_POST['sctvendorMvtNumber'] . "/" . $this->from . "/" . $this->to;
 			$vdrSctReport = $this->brdata->get_vendorSectionReport($_POST['svendorMvtNumber'], $_POST['sctvendorMvtNumber'], $this->today, $_POST['tovendorMvtSection'], $_POST['fromvendorMvtSection']);
 			$j=0;
 			$i=0;
@@ -479,7 +479,7 @@ class home extends Controller{
 			"CaseCost", "Retail", "onhand", "lastReceiving", "lastReceivingDate", "sales", "tpr", "tprStart", "tprEnd");
 		if(!empty($vendor))
 		{
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendor/".$vendor . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendor/".$vendor . "/" . $this->from . "/" . $this->to;
 			$vendorReport = $this->brdata->get_vendorReport($vendor, $this->today, $this->from, $this->to);
 			if(!empty($vendorReport[0]))
 			{
@@ -503,7 +503,7 @@ class home extends Controller{
 		{
 			$_POST['vendor1'] = $this->completeValue($_POST['vendor1'], 6);
 			$_POST['vendor2'] = $this->completeValue($_POST['vendor2'], 6);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorPriceCompare/".$_POST['vendor1'] . "/" . $_POST['vendor2'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorPriceCompare/".$_POST['vendor1'] . "/" . $_POST['vendor2'] . "/" . $this->from . "/" . $this->to;
 			$this->setDefaultDates($_POST['fromPriceCompare'], $_POST['toPriceCompare']);
 			$vendorReport = $this->brdata->vendorPriceCompare($_POST['vendor1'], $_POST['vendor2'], $this->today, $this->from, $this->to);
 			if(!empty($vendorReport[0]))
@@ -530,7 +530,7 @@ class home extends Controller{
 			$_POST['vendor1Section'] = $this->completeValue($_POST['vendor1Section'], 6);
 			$_POST['vendor2Section'] = $this->completeValue($_POST['vendor2Section'], 6);
 			$_POST['sectionCompare'] = $this->completeValue($_POST['sectionCompare'], 4);
-			$this->exportURL = "/csmnew/public/phpExcelExport/sectionPriceCompare/".$_POST['vendor1Section'] . "/" . $_POST['vendor2Section'] . "/"  . $_POST['sectionCompare'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/sectionPriceCompare/".$_POST['vendor1Section'] . "/" . $_POST['vendor2Section'] . "/"  . $_POST['sectionCompare'] . "/" . $this->from . "/" . $this->to;
 			$this->setDefaultDates($_POST['fromSectionCompare'], $_POST['toSectionCompare']);
 			$sectionReport = $this->brdata->sectionPriceCompare($_POST['vendor1Section'], $_POST['vendor2Section'], $_POST['sectionCompare'], $this->today, $this->from, $this->to);
 			if(!empty($sectionReport[0]))
@@ -557,7 +557,7 @@ class home extends Controller{
 			$_POST['upcRangeNo1'] = $this->completeValue($_POST['upcRangeNo1'], 15);
 			$_POST['upcRangeNo2'] = $this->completeValue($_POST['upcRangeNo2'], 15);
 			$this->setDefaultDates($_POST['fromupcRange'], $_POST['toupcRange']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/UPCRange/".$_POST['upcRangeNo1'] . "/" . $_POST['upcRangeNo2'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/UPCRange/".$_POST['upcRangeNo1'] . "/" . $_POST['upcRangeNo2'] . "/" . $this->from . "/" . $this->to;
 			$upcRangeReport = $this->brdata->get_upcRangeReport($_POST['upcRangeNo1'], $_POST['upcRangeNo2'], $this->today, $_POST['toupcRange'], $_POST['fromupcRange']);
 			$title = '[UPC RANGE : '.$_POST['upcRangeNo1'].' / '.$_POST['upcRangeNo2'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($upcRangeReport).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles , 
@@ -579,7 +579,7 @@ class home extends Controller{
 		if(!empty($_POST['itemDescription']))
 		{
 			$this->setDefaultDates($_POST['descriptionfrom'], $_POST['descriptionto']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/itemDescription/".str_replace(" ", "_", $_POST['itemDescription']) . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/itemDescription/".str_replace(" ", "_", $_POST['itemDescription']) . "/" . $this->from . "/" . $this->to;
 			$description = $this->brdata->get_itemDescription($_POST['itemDescription'], $this->today, $_POST['descriptionto'], $_POST['descriptionfrom']);
 			$title = '[ITEM : '.$_POST['itemDescription'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($description).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -604,7 +604,7 @@ class home extends Controller{
 			$_POST['svendorNumber'] = $this->completeValue($_POST['svendorNumber'], 6);
 			$_POST['sctvendorNumber'] = $this->completeValue($_POST['sctvendorNumber'], 4);
 			$this->setDefaultDates($_POST['fromvendorSection'], $_POST['tovendorSection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorSection/".$_POST['svendorNumber'] . "/" . $_POST['sctvendorNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorSection/".$_POST['svendorNumber'] . "/" . $_POST['sctvendorNumber'] . "/" . $this->from . "/" . $this->to;
 			$vdrSctReport = $this->brdata->get_vendorSectionReport($_POST['svendorNumber'], $_POST['sctvendorNumber'], $this->today, $_POST['tovendorSection'], $_POST['fromvendorSection']);
 			if(!empty($vdrSctReport[0]))
 			{
@@ -634,7 +634,7 @@ class home extends Controller{
 			$_POST['svendorNegNumber'] = $this->completeValue($_POST['svendorNegNumber'], 6);
 			$_POST['sctvendorNegNumber'] = $this->completeValue($_POST['sctvendorNegNumber'], 4);
 			$this->setDefaultDates($_POST['fromvendorNegSection'], $_POST['tovendorNegSection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorSectionNegative/".$_POST['svendorNegNumber'] . "/" . $_POST['sctvendorNegNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorSectionNegative/".$_POST['svendorNegNumber'] . "/" . $_POST['sctvendorNegNumber'] . "/" . $this->from . "/" . $this->to;
 			$report = $this->brdata->get_vendorSectionReport($_POST['svendorNegNumber'], $_POST['sctvendorNegNumber'], $this->today, $_POST['tovendorNegSection'], $_POST['fromvendorNegSection']);
 			if(!empty($report[0]))
 			{
@@ -662,7 +662,7 @@ class home extends Controller{
 		{
 			$_POST['sectionNumber'] = $this->completeValue($_POST['sectionNumber'], 4);
 			$this->setDefaultDates($_POST['fromsection'], $_POST['tosection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/section/".$_POST['sectionNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/section/".$_POST['sectionNumber'] . "/" . $this->from . "/" . $this->to;
 			$sectionReport = $this->brdata->get_sectionReport($_POST['sectionNumber'], $this->today, $_POST['fromsection'], $_POST['tosection']);
 			if(!empty($sectionReport[0]))
 			{
@@ -690,7 +690,7 @@ class home extends Controller{
 		{
 			$_POST['sectionNegNumber'] = $this->completeValue($_POST['sectionNegNumber'], 4);
 			$this->setDefaultDates($_POST['fromNegsection'], $_POST['toNegsection']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/sectionNegative/".$_POST['sectionNegNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/sectionNegative/".$_POST['sectionNegNumber'] . "/" . $this->from . "/" . $this->to;
 			$sectionReport = $this->brdata->get_sectionNegReport($_POST['sectionNegNumber'], $this->today, $_POST['fromNegsection'], $_POST['toNegsection']);
 			if(!empty($sectionReport[0]))
 			{
@@ -718,7 +718,7 @@ class home extends Controller{
 		{
 			$_POST['departmentNumber'] = $this->completeValue($_POST['departmentNumber'], 2);
 			$this->setDefaultDates($_POST['fromdepartment'], $_POST['todepartment']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/department/".$_POST['departmentNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/department/".$_POST['departmentNumber'] . "/" . $this->from . "/" . $this->to;
 			$departmentReport = $this->brdata->get_departmentReport($_POST['departmentNumber'], $this->today, $_POST['fromdepartment'], $_POST['todepartment']);
 			if(!empty($departmentReport[0]))
 			{
@@ -746,7 +746,7 @@ class home extends Controller{
 			$_POST['dvendorNumber'] = $this->completeValue($_POST['dvendorNumber'], 6);
 			$_POST['dptvendorNumber'] = $this->completeValue($_POST['dptvendorNumber'], 2);
 			$this->setDefaultDates($_POST['fromvendorDpt'], $_POST['tovendorDpt']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorDepartment/".$_POST['dvendorNumber'] . "/" . $_POST['dptvendorNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorDepartment/".$_POST['dvendorNumber'] . "/" . $_POST['dptvendorNumber'] . "/" . $this->from . "/" . $this->to;
 			$vdrDptReport = $this->brdata->get_vendorDepartmentReport($_POST['dvendorNumber'], $_POST['dptvendorNumber'], $this->today, $_POST['fromvendorDpt'], $_POST['tovendorDpt']);
 			if(!empty($vdrDptReport[0]))
 			{
@@ -774,7 +774,7 @@ class home extends Controller{
 			$_POST['dvendorNumberNeg'] = $this->completeValue($_POST['dvendorNumberNeg'], 6);
 			$_POST['dptvendorNumberNeg'] = $this->completeValue($_POST['dptvendorNumberNeg'], 2);
 			$this->setDefaultDates($_POST['fromvendorDptNeg'], $_POST['tovendorDptNeg']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorDepartmentNegative/".$_POST['dvendorNumberNeg'] . "/" . $_POST['dptvendorNumberNeg'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorDepartmentNegative/".$_POST['dvendorNumberNeg'] . "/" . $_POST['dptvendorNumberNeg'] . "/" . $this->from . "/" . $this->to;
 			$report = $this->brdata->get_vendorDepartmentReport($_POST['dvendorNumberNeg'], $_POST['dptvendorNumberNeg'], $this->today, $_POST['fromvendorDptNeg'], $_POST['tovendorDptNeg']);
 			if(!empty($report[0]))
 			{
@@ -799,7 +799,7 @@ class home extends Controller{
 		{
 			$_POST['upcNumber'] = $this->completeValue($_POST['upcNumber'], 15);
 			$this->setDefaultDates($_POST['fromupc'], $_POST['toupc']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/UPCPriceCompare/".$_POST['upcNumber'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/UPCPriceCompare/".$_POST['upcNumber'] . "/" . $this->from . "/" . $this->to;
 			$upcReport = $this->brdata->get_upcReport($_POST['upcNumber'], $this->today, $_POST['toupc'], $_POST['fromupc']);
 			$title = '[UPC : '.$_POST['upcNumber'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($upcReport).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -819,7 +819,7 @@ class home extends Controller{
 			"CaseCost", "unitPrice", "Retail", "onhand", "lastReceiving", "lastReceivingDate", "sales", "tpr", "tprStart", "tprEnd");
 		if(!empty($upc))
 		{
-			$this->exportURL = "/csmnew/public/phpExcelExport/UPCPriceCompare/". $upc . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/UPCPriceCompare/". $upc . "/" . $this->from . "/" . $this->to;
 			$upcReport = $this->brdata->get_upcReport($upc, $this->today, $this->to, $this->from);
 			$title = '[UPC : '.$upc.'] - ['.$this->from.' to '.$this->to.'] - ['.count($upcReport).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -840,7 +840,7 @@ class home extends Controller{
 		if(!empty($_POST['itemcode']))
 		{
 			$this->setDefaultDates($_POST['fromcode'], $_POST['tocode']);
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorItemCode/".$_POST['itemcode'] . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorItemCode/".$_POST['itemcode'] . "/" . $this->from . "/" . $this->to;
 			$itemcodereport = $this->brdata->get_itemcodeReport($_POST['itemcode'], $this->today, $_POST['tocode'], $_POST['fromcode']);
 			$title = '[ITEM CODE : '.$_POST['itemcode'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($itemcodereport).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -860,7 +860,7 @@ class home extends Controller{
 			"CaseCost", "Retail", "onhand", "lastReceiving", "lastReceivingDate", "sales", "tpr", "tprStart", "tprEnd");
 		if(!empty($itemCode))
 		{
-			$this->exportURL = "/csmnew/public/phpExcelExport/vendorItemCode/".$itemCode . "/" . $this->from . "/" . $this->to;
+			$this->exportURL = "/csm/public/phpExcelExport/vendorItemCode/".$itemCode . "/" . $this->from . "/" . $this->to;
 			$itemcodereport = $this->brdata->get_itemcodeReport($itemCode, $this->today, $this->to, $this->from);
 			$title = '[ITEM CODE : '.$itemCode.'] - ['.$this->from.' to '.$this->to.'] - ['.count($itemcodereport).' ITEMS]';
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -876,7 +876,7 @@ class home extends Controller{
 		$this->classname = "liststable";
 		$theadTitles = array("VDR #", "VDR NAME");
 		$queryTitles = array("VdrNo", "VdrName");
-		$this->exportURL = "/csmnew/public/phpExcelExport/vendorNames/";
+		$this->exportURL = "/csm/public/phpExcelExport/vendorNames/";
 		$vendorNames = $this->brdata->get_vendorNames();
 		$title = "VENDOR NAMES REPORT";
 		$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -892,7 +892,7 @@ class home extends Controller{
 		$this->classname = "liststable";
 		$theadTitles = array("DPT NO", "DPT NAME", "SCT NO", "SCT NAME");
 		$queryTitles = array("DptNo", "DptName", "SctNo", "SctName");
-		$this->exportURL = "/csmnew/public/phpExcelExport/sectionNames";
+		$this->exportURL = "/csm/public/phpExcelExport/sectionNames";
 		$sectionNames = $this->brdata->get_sectionNames();
 		$title = "SECTION NAMES REPORT";
 		$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -907,7 +907,7 @@ class home extends Controller{
 		$this->classname = "liststable";
 		$theadTitles = array("DPT NO", "DPT NAME");
 		$queryTitles = array("DptNo", "DptName");
-		$this->exportURL = "/csmnew/public/phpExcelExport/departmentNames/";
+		$this->exportURL = "/csm/public/phpExcelExport/departmentNames/";
 		$departmentNames = $this->brdata->get_departmentNames();
 		$title = "DEPARTMENT NAMES REPORT";
 		$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -921,7 +921,7 @@ class home extends Controller{
 		$data = array();
 		$theadTitles = array("UPC", "ITEM DESCRIPTION", "SECTION NO", "SECTION NAME","LAST RECEIVING", "LAST RECEIVING DATE", "ADJUSTMENT", "ADJUSTMENT DATE");
 		$queryTitles = array("UPC", "ItemDescription", "SctNo", "SctName", "lastReceiving", "lastReceivingDate", "adj", "Date");
-		$this->exportURL = "/csmnew/public/phpExcelExport/adjustments";
+		$this->exportURL = "/csm/public/phpExcelExport/adjustments";
 		$adjustments = $this->brdata->get_adjReport();
 		$title = "ADJUSTMENTS REPORT";
 		$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -934,7 +934,7 @@ class home extends Controller{
 	{
 		session_unset();
 		session_destroy();
-		header('Location: /csmnew/public/login');
+		header('Location: /csm/public/login');
 	}
 
 	private function renderView($data)

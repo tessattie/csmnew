@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/csmnew/public/home"><p><img src="/csmnew/public/images/logo.png" class="logo"></p></a>
+      <a class="navbar-brand" href="/csm/public/home"><p><img src="/csm/public/images/logo.png" class="logo"></p></a>
     </div>
 
     <form class="form-inline my-2 my-lg-0" style="width:39%;float:left">
@@ -31,21 +31,21 @@
         } 
         ?>
       
-        <li><a href="/csmnew/public/home/vendorNames" class="menuitems navrightmenu">Vendor list</a></li>
+        <li><a href="/csm/public/home/vendorNames" class="menuitems navrightmenu">Vendor list</a></li>
         
         <?php if($_SESSION["csm"]['role'] != "10") : ?>
-          <li><a href="/csmnew/public/home/sectionNames" class="menuitems navrightmenu">Section list</a></li>
-        <li><a href="/csmnew/public/home/departmentNames" class="menuitems navrightmenu">Department list</a></li>
-          <li><a href="/csmnew/public/home/specials" class="menuitems navrightmenu">Special list</a></li>
+          <li><a href="/csm/public/home/sectionNames" class="menuitems navrightmenu">Section list</a></li>
+        <li><a href="/csm/public/home/departmentNames" class="menuitems navrightmenu">Department list</a></li>
+          <li><a href="/csm/public/home/specials" class="menuitems navrightmenu">Special list</a></li>
         <?php else : ?>
         <?php endif; ?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle navrightmenu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?= ucfirst($_SESSION["csm"]['firstname']); ?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/csmnew/public/home">Home</a></li>
-            <li><a href="/csmnew/public/account">Settings</a></li>
+            <li><a href="/csm/public/home">Home</a></li>
+            <li><a href="/csm/public/account">Settings</a></li>
             <li><a target = "_blank" href="<?= $data['exportURL']; ?>" id="export">Export</a></li>
-            <li><a href="/csmnew/public/home/logout">Log out</a></li>
+            <li><a href="/csm/public/home/logout">Log out</a></li>
           </ul>
         </li>
       </ul>
@@ -58,7 +58,7 @@
       <?php 
       if(!empty($data['title']))
       {
-        echo '<p class="filArianne"><span class="csm"><a href="/csmnew/public/home">CSM</a></span><span class="glyphicon glyphicon-chevron-right"></span><span class="tablecaption">'.$data['title'].'</span>';
+        echo '<p class="filArianne"><span class="csm"><a href="/csm/public/home">CSM</a></span><span class="glyphicon glyphicon-chevron-right"></span><span class="tablecaption">'.$data['title'].'</span>';
       }
       ?>
     </div>
