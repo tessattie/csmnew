@@ -126,6 +126,34 @@ class phpExcelExport extends Controller{
 		$this->saveReport('VendorSectionFinalNegative_'.$vendor.'_'.$report[0]['VdrName'].'_'.$this->today);
 	}
 
+
+	public function departmentNegative($dpt, $from, $to)
+	{
+		$header = array("A" => "UPC", 
+						"B" => "VDR ITEM #", 
+						"C" => "BRAND", 
+						"D" => "ITEM DESCRIPTION", 
+						"E" => "PACK", 
+						"F" => "SIZE", 
+						"G" => "CASE COST", 
+						"H" => "RETAIL", 
+						"I" => "ON-HAND", 
+						"J" => "LAST REC", 
+						"K" => "LAST REC DATE", 
+						"L" => "SALES", 
+						"M" => "TPR PRICE", 
+						"N" => "TPR START", 
+						"O" => "TPR END");
+		$this->setSheetName("DEPARTMENT NEGATIVE FOR INVENTORY");
+		$report = $this->brdata->get_departmentNegativeReport($dpt, $this->today, $from, $to);
+		$bold = array("G", "M", "H", "I");
+		$lastItem = count($report) + 4;
+		$this->setHeader("DEPARTMENT NEGATIVE FOR INVENTORY","[ DPT : " . $dpt . " - ".$report[0]['DptName']." ] - [ 
+			".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", $header, 'dptReport', $lastItem);
+		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D");
+		$this->saveReport('DepartmentNegativeForInventory_'.$dpt.'_'.$report[0]['DptName'].'_'.$this->today);
+	}
+
 	public function vendorMovement($vendor, $from, $to)
 	{
 		$header = array("A" => "UPC", 

@@ -210,6 +210,23 @@ jQuery(function($){
 		}
 	});
 
+	$("#department2").click(function(){ 
+		var regex = /[0-9]/;
+		var departmentNumber = prompt('Enter the department Number : ');
+		if(regex.test(departmentNumber))
+		{
+			$("#departmentNumber2").val(departmentNumber);
+			$("#fromdepartment2").val($('#fromdate').val());
+			$("#todepartment2").val($('#todate').val());
+			document.forms["departmentform2"].submit();
+			$("#departmentNumber2").val('');
+		}
+		else
+		{
+			alert("There are no department numbers with more than two digits. Try again.");
+		}
+	});
+
 	$("#vendorDepartment").click(function(){ 
 		var regex = /[0-9]/;
 		var vendorNumber = prompt('Enter the vendor number :')

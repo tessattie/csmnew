@@ -153,4 +153,12 @@
         <input type='hidden' name = 'fromlimitedVendorNo' id = 'fromlimitedVendorNo'>
         <input type='hidden' name = 'tolimitedVendorNo' id = 'tolimitedVendorNo'>
     </form>
+
+
+    <a href="#" id="department2" class="list-group-item">Department Negative for Inventory</a>
+    <form method = 'POST' action = '/csm/public/home/departmentNegative' name='departmentform2' id = 'departmentform2'>
+        <input type='hidden' name = 'departmentNumber2' id = 'departmentNumber2'>
+        <input type='hidden' name = 'fromdepartment2' id = 'fromdepartment2'>
+        <input type='hidden' name = 'todepartment2' id = 'todepartment2'>
+    </form>
     </div>

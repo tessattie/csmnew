@@ -731,6 +731,34 @@ class home extends Controller{
 		$this->renderView($data);
 	}
 
+
+	public function departmentNegative()
+	{
+		$data = array();
+		$title = "";
+		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
+			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
+			"VDR #", "VDR NAME", "TPR PRICE", "TPR START DATE", "TPR END DATE");
+		$queryTitles = array("UPC", "CertCode", "Brand", "ItemDescription", "Pack", "SizeAlpha",
+			"CaseCost", "Retail", "onhand", "lastReceiving", "lastReceivingDate", "sales", 
+			"VdrNo", "VdrName", "tpr", "tprStart", "tprEnd");
+		if(!empty($_POST['departmentNumber2']))
+		{
+			$_POST['departmentNumber2'] = $this->completeValue($_POST['departmentNumber2'], 2);
+			$this->setDefaultDates($_POST['fromdepartment2'], $_POST['todepartment2']);
+			$this->exportURL = "/csm/public/phpExcelExport/departmentNegative/".$_POST['departmentNumber2'] . "/" . $this->from . "/" . $this->to;
+			$departmentReport = $this->brdata->get_departmentNegativeReport($_POST['departmentNumber2'], $this->today, $_POST['fromdepartment2'], $_POST['todepartment2']);
+			if(!empty($departmentReport[0]))
+			{
+				$title = '[DPT'.$_POST['departmentNumber2'].'] - ['.$departmentReport[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($departmentReport).' ITEMS]';				
+			}
+			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
+				"title" => $title, "tableID" => "report_result", "action" => "department", "reportType" => 'templateWithSectionOrderNegative', 
+				"from" => $this->from, "to" => $this->to, "report" => $departmentReport, "menu" => $this->userRole);
+		}
+		$this->renderView($data);
+	}
+
 	public function vendorDepartment()
 	{
 		$data = array();
