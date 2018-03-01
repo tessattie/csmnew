@@ -621,7 +621,9 @@ class brdata{
 
 	public function vendorPriceCompare($vendor1, $vendor2, $today, $from, $to)
 	{
-		$drop1 = "DROP VIEW vendor1";
+		$drop1 = "IF EXISTS (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS
+				        WHERE TABLE_NAME = 'vendor1')
+				    DROP VIEW vendor1";
 		$view1 = "CREATE VIEW vendor1 AS (SELECT  vc.UPC, v.Vendor AS VdrNo, v.VendorName AS VdrName, vc.VendorItem AS CertCode, vc.CaseCost, p.TPRPrice AS tpr, p.TPRStartDate AS tprStart, p.TPREndDate AS tprEnd,
 				i.Brand, vc.Pack, i.SizeAlpha, i.Department AS SctNo, i.MajorDept AS DptNo, i.Description AS ItemDescription, p.BasePrice as Retail,
 				d.Description AS SctName, md.Description AS DptName, 
@@ -652,7 +654,9 @@ class brdata{
 				INNER JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
 				WHERE v.Vendor = '".$vendor1."' AND p.Store = '00000A');";
 		
-		$drop2 = "DROP VIEW vendor2";
+		$drop2 = "IF EXISTS (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS
+        WHERE TABLE_NAME = 'vendor2')
+    DROP VIEW vendor2";
 		$view2 = "CREATE VIEW vendor2 AS (SELECT  vc.UPC, v.Vendor AS VdrNo, v.VendorName AS VdrName, vc.VendorItem AS CertCode, vc.CaseCost, p.TPRPrice AS tpr, p.TPRStartDate AS tprStart, p.TPREndDate AS tprEnd,
 				i.Brand, vc.Pack, i.SizeAlpha, i.Department AS SctNo, i.MajorDept AS DptNo, i.Description AS ItemDescription, p.BasePrice as Retail,
 				d.Description AS SctName, md.Description AS DptName,
@@ -708,7 +712,9 @@ class brdata{
 	public function sectionPriceCompare($vendor1, $vendor2, $section, $today, $from, $to)
 	{
 
-		$drop1 = "DROP VIEW section1";
+		$drop1 = "IF EXISTS (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS
+				        WHERE TABLE_NAME = 'section1')
+				    DROP VIEW section1";
 		$view1 = "CREATE VIEW section1 AS (SELECT  vc.UPC, v.Vendor AS VdrNo, v.VendorName AS VdrName, vc.VendorItem AS CertCode, vc.CaseCost,
 				i.Brand, vc.Pack, i.SizeAlpha, i.Department AS SctNo, i.MajorDept AS DptNo, i.Description AS ItemDescription, p.BasePrice as Retail, p.TPRPrice AS tpr, p.TPRStartDate AS tprStart, p.TPREndDate AS tprEnd,
 				d.Description AS SctName, md.Description AS DptName, 
@@ -739,7 +745,9 @@ class brdata{
 				INNER JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
 				WHERE v.Vendor = '".$vendor1."' AND p.Store = '00000A' AND i.Department = '".$section."');";
 		
-		$drop2 = "DROP VIEW section2";
+		$drop2 = "IF EXISTS (SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS
+				        WHERE TABLE_NAME = 'section2')
+				    DROP VIEW section2";
 		$view2 = "CREATE VIEW section2 AS (SELECT  vc.UPC, v.Vendor AS VdrNo, v.VendorName AS VdrName, vc.VendorItem AS CertCode, vc.CaseCost,
 				i.Brand, vc.Pack, i.SizeAlpha, i.Department AS SctNo, i.MajorDept AS DptNo, i.Description AS ItemDescription, p.BasePrice as Retail, p.TPRPrice AS tpr, p.TPRStartDate AS tprStart, p.TPREndDate AS tprEnd,
 				d.Description AS SctName, md.Description AS DptName,
