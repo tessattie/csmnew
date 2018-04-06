@@ -2,6 +2,7 @@
 <?php 
 $increment = 0; 
 $condition = 'ht' ;
+$count = 0;
 $elementCount = count($data['thead']);
 $tdCount = $elementCount - 4;
 if(!empty($data['report']) && $data['report'] != null && $data['report'] != false && count($data['report']) != 0)
@@ -16,6 +17,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
     {
         if(($data['report'][$i]['onhand'] < 0 && $data['report'][$i]['SctNo'] !=  184) && !empty($data['report'][$i+1]) && $data['report'][$i]['UPC'] != $data['report'][$i+1]['UPC'])
         {
+            $count++;
             $onhandClass = "positive"; 
         if($increment == 0 || $condition != $data['report'][$i]['SctNo'])
         {
@@ -112,6 +114,7 @@ else
 ?>
 </tbody>
 </table>
+<span class= "countNumberToChange"><?= $count ?></span>
 </div>
 </div>
 </div>

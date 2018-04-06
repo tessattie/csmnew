@@ -7,6 +7,9 @@ body {
     background-attachment: fixed;
     background-color: #eee;
 }
+.countNumberToChange{
+	display:none;
+}
 .title
 {
 	float:right;

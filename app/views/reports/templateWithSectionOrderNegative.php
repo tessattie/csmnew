@@ -2,6 +2,7 @@
 <?php 
 $increment = 0; 
 $condition = 'ht' ;
+$count = 0;
 $elementCount = count($data['thead']);
 $tdCount = $elementCount - 4;
 if(!empty($data['report']) && $data['report'] != null && $data['report'] != false && count($data['report']) != 0)
@@ -16,6 +17,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
     {
         if($data['report'][$i]['onhand'] < 0 && $data['report'][$i]['SctNo'] !=  184)
         {
+            $count++;
             $onhandClass = "positive"; 
         if($increment == 0 || $condition != $data['report'][$i]['SctNo'])
         {
@@ -110,6 +112,7 @@ else
 	echo "<a href='/csm/public/home/'><p class='text-warning errortext'>THE REPORT DID NOT GENERATE ANY RESULTS. PLEASE CHECK THE UPC NUMBER. DID YOU ENTER THE RIGHT SALES DATES ?</p></a>";
 }
 ?>
+<span class= "countNumberToChange"><?= $count ?></span>
 </tbody>
 </table>
 </div>

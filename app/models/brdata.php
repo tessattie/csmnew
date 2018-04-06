@@ -193,7 +193,7 @@ class brdata{
 				INNER JOIN dbo.Item i ON i.UPC = vc.UPC
 				INNER JOIN dbo.Departments d ON d.Department = i.Department
 				INNER JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
-				WHERE ".$sectionString." AND v.Vendor = '".$vendorNumber."' AND p.Store = '00000A' ".$this->condition."
+				WHERE (".$sectionString.") AND v.Vendor = '".$vendorNumber."' AND p.Store = '00000A' ".$this->condition."
 				ORDER BY i.Department, i.Description, vc.Pack DESC, i.SizeAlpha DESC;";
 
 		// Execute query

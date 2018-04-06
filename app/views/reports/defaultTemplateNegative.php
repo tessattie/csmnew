@@ -1,6 +1,7 @@
 <?php include 'tablenav.php';?>
 <?php 
 $elementCount = count($data['thead']);
+$count = 0;
 if(!empty($data['report']) && $data['report'] != null && $data['report'] != false && count($data['report']) != 0)
 {
     echo "<thead class='thead_position'><tr>";
@@ -13,12 +14,14 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
     {
         if($data['report'][$i]["onhand"] < 0)
         {
+            
             if($data['action'] == "sectionNegative" && $i >= 1 && $data['report'][$i]["UPC"] == $data['report'][$i-1]["UPC"])
             {
 
             }
             else
             {
+                $count++;
                $onhandClass = "negative"; 
             if(!empty($data['report'][$i]["onhand"]))
             {
@@ -97,8 +100,11 @@ else
 	echo "<a href='/csm/public/home/'><p class='text-warning errortext'>THE REPORT DID NOT GENERATE ANY RESULTS. PLEASE CHECK THE UPC NUMBER. DID YOU ENTER THE RIGHT SALES DATES ?</p></a>";
 }
 ?>
+
 </tbody>
 </table>
+
+<span class= "countNumberToChange"><?= $count ?></span>
 </div>
 </div>
 </div>
