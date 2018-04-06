@@ -154,8 +154,17 @@ class brdata{
 		return $report ;
 	}
 
-	public function get_vendorSectionReport($vendorNumber, $sectionNumber, $today, $to, $from)
+	public function get_vendorSectionReport($vendorNumber, $sections, $today, $to, $from)
 	{
+
+		$sectionString = "";
+		for($i=0;$i<count($sections);$i++){
+			if($sectionString == ""){
+				$sectionString .= " i.department = '".$sections[$i]."' ";
+			}else{
+				$sectionString .= " OR i.department = '".$sections[$i]."' ";
+			}
+		}
 		$SQL = "SELECT  vc.UPC, v.Vendor AS VdrNo, v.VendorName AS VdrName, vc.VendorItem AS CertCode, vc.CaseCost,
 				i.Brand, vc.Pack, i.SizeAlpha, i.Department AS SctNo, i.MajorDept AS DptNo, i.Description AS ItemDescription, p.BasePrice as Retail, p.TPRPrice AS tpr, p.TPRStartDate AS tprStart, p.TPREndDate AS tprEnd,
 				d.Description AS SctName, md.Description AS DptName,
@@ -184,7 +193,7 @@ class brdata{
 				INNER JOIN dbo.Item i ON i.UPC = vc.UPC
 				INNER JOIN dbo.Departments d ON d.Department = i.Department
 				INNER JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
-				WHERE v.Vendor = '".$vendorNumber."' AND p.Store = '00000A' AND i.Department = '".$sectionNumber."' ".$this->condition."
+				WHERE ".$sectionString." AND v.Vendor = '".$vendorNumber."' AND p.Store = '00000A' ".$this->condition."
 				ORDER BY i.Department, i.Description, vc.Pack DESC, i.SizeAlpha DESC;";
 
 		// Execute query

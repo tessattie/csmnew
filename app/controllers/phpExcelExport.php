@@ -499,7 +499,8 @@ class phpExcelExport extends Controller{
 						"N" => "TPR START", 
 						"O" => "TPR END");
 		$this->setSheetName("VENDOR SECTION NEGATIVE ON-HAND REPORT");
-		$report = $this->brdata->get_vendorSectionReport($vendor, $section, $this->today, $to, $from);
+		$secArray = explode("_", $section);
+		$report = $this->brdata->get_vendorSectionReport($vendor, $secArray, $this->today, $to, $from);
 		$bold = array("G", "H", "I", "M");
 		$lastItem = count($report) + 4;
 		$this->setHeader("VENDOR SECTION REPORT WITH NEGATIVE ON-HAND","[ VENDOR : " . $vendor . " - ".$report[0]['VdrName'] ." ] - [ SECTION : " . $section . " - " . $report[0]['SctName'] . "] - [ 
@@ -704,13 +705,16 @@ class phpExcelExport extends Controller{
 						"N" => "TPR START", 
 						"O" => "TPR END");
 		$this->setSheetName("VENDOR SECTION REPORT");
-		$report = $this->brdata->get_vendorSectionReport($vendor, $section, $this->today, $to, $from);
+		$secArray = explode("_", $section);
+		$report = $this->brdata->get_vendorSectionReport($vendor, $secArray, $this->today, $to, $from);
+		// var_dump($report); 
+		// die();
 		$lastItem = count($report) + 4;
 		$bold = array("G", "H", "I", "M");
 		$this->setHeader("VENDOR SECTION REPORT" ,"[ VENDOR : " . $vendor . " - " . $report[0]['VdrName'] . 
 			" ] - [ SECTION ".$section." - " . $report[0]['SctName'] . "] - [ ".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", 
 			$header, 'vdrSctReport', $lastItem);
-		$this->setReport($header, $report, $bold, "A", "", "D");
+		$this->setReportWithSection($header, $report, $bold, "A", "", "D");
 		$this->saveReport('VendorSection_'.$report[0]['VdrName'].'_'.$report[0]['SctName'].'_'.$this->today);
 	}
 

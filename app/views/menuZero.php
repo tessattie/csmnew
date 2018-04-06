@@ -40,21 +40,21 @@
         <input type='hidden' name = 'toPriceCompare' id = 'toPriceCompare'>
     </form>
 
-  <a href="#" id="vendor" class="list-group-item">Vendor Section Final - Normal</a>
+  <a href="#" id="vendor" class="list-group-item">Vendor Complete - Normal</a>
       <form method = 'POST' action = '/csm/public/home/vendor' name='vendorform' id = 'vendorform'>
           <input type='hidden' name = 'vendorNumber' id = 'vendorNumber'>
           <input type='hidden' name = 'fromvendor' id = 'fromvendor'>
           <input type='hidden' name = 'tovendor' id = 'tovendor'>
         </form>
 
-    <a href="#" id="vendorNegative" class="list-group-item">Vendor Section Final - Negative</a>
+    <a href="#" id="vendorNegative" class="list-group-item">Vendor Complete - Negative</a>
       <form method = 'POST' action = '/csm/public/home/vendorNegative' name='vendorNegativeform' id = 'vendorNegativeform'>
           <input type='hidden' name = 'vendorNegNumber' id = 'vendorNegNumber'>
           <input type='hidden' name = 'fromNegvendor' id = 'fromNegvendor'>
           <input type='hidden' name = 'toNegvendor' id = 'toNegvendor'>
         </form>
 
-    <a href="#" id="vendorSection" class="list-group-item">Vendor section</a>
+    <a href="#" id="vendorSection" class="list-group-item">Vendor Section(s)</a>
     <form method = 'POST' action = '/csm/public/home/vendorSection' name='vendorSectionform' id = 'vendorSectionform'>
         <input type='hidden' name = 'svendorNumber' id = 'svendorNumber'>
         <input type='hidden' name = 'sctvendorNumber' id = 'sctvendorNumber'>
