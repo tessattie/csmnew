@@ -121,8 +121,9 @@ class phpExcelExport extends Controller{
 		$bold = array("G", "M", "H", "I");
 		$lastItem = count($report) + 4;
 		$this->setHeader("VENDOR SECTION FINAL REPORT WITH NEGATIVE ON-HAND","[ VENDOR : " . $vendor . " - ".$report[0]['VdrName']." ] - [ 
-			".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", $header, 'vdrReport', $lastItem);
-		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D");
+			".$from." - ".$to." ]", $header, 'vdrReport', $lastItem);
+		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D","[ VENDOR : " . $vendor . " - ".$report[0]['VdrName']." ] - [ 
+			".$from." - ".$to." ]");
 		$this->saveReport('VendorSectionFinalNegative_'.$vendor.'_'.$report[0]['VdrName'].'_'.$this->today);
 	}
 
@@ -149,8 +150,9 @@ class phpExcelExport extends Controller{
 		$bold = array("G", "M", "H", "I");
 		$lastItem = count($report) + 4;
 		$this->setHeader("DEPARTMENT NEGATIVE FOR INVENTORY","[ DPT : " . $dpt . " - ".$report[0]['DptName']." ] - [ 
-			".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", $header, 'dptReport', $lastItem);
-		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D");
+			".$from." - ".$to." ]", $header, 'dptReport', $lastItem);
+		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D", "[ DPT : " . $dpt . " - ".$report[0]['DptName']." ] - [ 
+			".$from." - ".$to." ]");
 		$this->saveReport('DepartmentNegativeForInventory_'.$dpt.'_'.$report[0]['DptName'].'_'.$this->today);
 	}
 
@@ -301,8 +303,9 @@ class phpExcelExport extends Controller{
 		$lastItem = count($report) + 4;
 		$bold = array("G", "H", "I", "M");
 		$this->setHeader("VENDOR DEPARTMENT NEGATIVE REPORT" ,"[ VENDOR : " . $vendor . " -  ".$report[0]['VdrName']." ] - [ DPT : 
-			" . $department . " - " . $report[0]['DptName'] . "] - [ ".$from." - ".$to."]"." - [ ".count($report)." ITEMS ]", $header, "vdrDpt", $lastItem);
-		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D");
+			" . $department . " - " . $report[0]['DptName'] . "] - [ ".$from." - ".$to."]", $header, "vdrDpt", $lastItem);
+		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D", "[ VENDOR : " . $vendor . " -  ".$report[0]['VdrName']." ] - [ DPT : 
+			" . $department . " - " . $report[0]['DptName'] . "] - [ ".$from." - ".$to."]");
 		$this->saveReport('VendorDepartment'.$report[0]['VdrName'].'_'.$report[0]['DptName'].'_'.$this->today);
 	}
 
@@ -446,8 +449,8 @@ class phpExcelExport extends Controller{
 		$report = $this->brdata->get_multipleSectionNegReport($secArray, $this->today, $from, $to);
 		$bold = array("G", "H", "I", "O");
 		$lastItem = count($report) + 4;
-		$this->setHeader("MULTIPLE SECTIONS REPORT" ," [SCT : ".$sections." ] [ ".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", $header, "sctReport", $lastItem);
-		$this->setReportWithSectionNegativeRepeat($header, $report, $bold, "A", "", "D");
+		$this->setHeader("MULTIPLE SECTIONS REPORT" ," [SCT : ".$sections." ] [ ".$from." - ".$to." ]", $header, "sctReport", $lastItem);
+		$this->setReportWithSectionNegativeRepeat($header, $report, $bold, "A", "", "D", " [SCT : ".$sections." ] [ ".$from." - ".$to." ]");
 		// print_r(array("Memcache" => $timeMemcache, "PHPExcel" => $timePHPExcel));
 		$this->saveReport('MultipleSections_' . $sections . '_' . $this->today);
 	}
@@ -476,7 +479,7 @@ class phpExcelExport extends Controller{
 		$bold = array("G", "H", "I", "O");
 		$lastItem = count($report) + 4;
 		$this->setHeader("SECTION NEGATIVE REPORT" ," [SCT : ".$section." - " . $report[0]['SctName'] . " ] [ ".$from." - ".$to." ]", $header, "sctReport", $lastItem);
-		$this->setReportNegative($header, $report, $bold, "A", "", "D", "sectionNeg");
+		$this->setReportNegative($header, $report, $bold, "A", "", "D", "sectionNeg"," [SCT : ".$section." - " . $report[0]['SctName'] . " ] [ ".$from." - ".$to." ]");
 		// print_r(array("Memcache" => $timeMemcache, "PHPExcel" => $timePHPExcel));
 		$this->saveReport('SectionNegative_' . $report[0]['SctName'] . '_' . "_". $section . "_" . $this->today);
 	}
@@ -499,12 +502,14 @@ class phpExcelExport extends Controller{
 						"N" => "TPR START", 
 						"O" => "TPR END");
 		$this->setSheetName("VENDOR SECTION NEGATIVE ON-HAND REPORT");
-		$report = $this->brdata->get_vendorSectionReport($vendor, $section, $this->today, $to, $from);
+		$secArray = explode("_", $section);
+		$report = $this->brdata->get_vendorSectionReport($vendor, $secArray, $this->today, $to, $from);
 		$bold = array("G", "H", "I", "M");
 		$lastItem = count($report) + 4;
 		$this->setHeader("VENDOR SECTION REPORT WITH NEGATIVE ON-HAND","[ VENDOR : " . $vendor . " - ".$report[0]['VdrName'] ." ] - [ SECTION : " . $section . " - " . $report[0]['SctName'] . "] - [ 
-			" . $from . " - " . $to . " ]"." - [ ".count($report)." ITEMS ]", $header, 'vdrSctNegativeReport', $lastItem);
-		$this->setReportNegative($header, $report, $bold, "A", "", "D");
+			" . $from . " - " . $to . " ]", $header, 'vdrSctNegativeReport', $lastItem);
+		$this->setReportWithSectionNegative($header, $report, $bold, "A", "", "D","[ VENDOR : " . $vendor . " - ".$report[0]['VdrName'] ." ] - [ SECTION : " . $section . " - " . $report[0]['SctName'] . "] - [ 
+			" . $from . " - " . $to . " ]");
 		$this->saveReport('VendorSectionNegative_'.$vendor.'_'.$report[0]['VdrName'].'_'.$this->today);
 	}
 
@@ -704,13 +709,16 @@ class phpExcelExport extends Controller{
 						"N" => "TPR START", 
 						"O" => "TPR END");
 		$this->setSheetName("VENDOR SECTION REPORT");
-		$report = $this->brdata->get_vendorSectionReport($vendor, $section, $this->today, $to, $from);
+		$secArray = explode("_", $section);
+		$report = $this->brdata->get_vendorSectionReport($vendor, $secArray, $this->today, $to, $from);
+		// var_dump($report); 
+		// die();
 		$lastItem = count($report) + 4;
 		$bold = array("G", "H", "I", "M");
 		$this->setHeader("VENDOR SECTION REPORT" ,"[ VENDOR : " . $vendor . " - " . $report[0]['VdrName'] . 
 			" ] - [ SECTION ".$section." - " . $report[0]['SctName'] . "] - [ ".$from." - ".$to." ]"." - [ ".count($report)." ITEMS ]", 
 			$header, 'vdrSctReport', $lastItem);
-		$this->setReport($header, $report, $bold, "A", "", "D");
+		$this->setReportWithSection($header, $report, $bold, "A", "", "D");
 		$this->saveReport('VendorSection_'.$report[0]['VdrName'].'_'.$report[0]['SctName'].'_'.$this->today);
 	}
 
@@ -1067,13 +1075,15 @@ class phpExcelExport extends Controller{
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
 
-	private function setReportNegative($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D", $reportType = '')
+	private function setReportNegative($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D", $reportType = '', $subtitle)
 	{
 		$j = 4;
+		$countItems = 0;
 		$lastKey = $this->getLastArrayKey($header);
 		for ($i=0;$i<count($report);$i++)
 		{
 			if($report[$i]['onhand'] < 0){
+				$countItems++;
 				if($reportType == "sectionNeg" && $i >= 1 && $report[$i]["UPC"] == $report[$i-1]["UPC"]){
 
 				}else{
@@ -1141,6 +1151,9 @@ class phpExcelExport extends Controller{
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
+
+		$this->sheet->setCellValue('A2', $subtitle." - [ ".$countItems." ITEMS ]");
+
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
 
@@ -1241,9 +1254,10 @@ class phpExcelExport extends Controller{
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
 
-	private function setReportWithSectionNegative($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D")
+	private function setReportWithSectionNegative($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D", $subtitle)
 	{
 		$j = 4;
+		$countItems = 0;
 		$lastKey = $this->getLastArrayKey($header);
 		$alphabet = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 		$start = $alphabet[array_search($this->getItemDescriptionColumn($header), $alphabet) - 1];
@@ -1255,6 +1269,7 @@ class phpExcelExport extends Controller{
 		{
 			if($report[$i]['onhand'] < 0 && $report[$i]["SctNo"] != 184)
 			{
+				$countItems++;
 				if($increment == 0 || $condition != $report[$i]["SctNo"])
 				{
 					$this->sheet->mergeCells('A' . $j . ':' . $start . $j);
@@ -1330,12 +1345,17 @@ class phpExcelExport extends Controller{
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$this->sheet->getStyle($upc_col . "3:" . $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
+
+		$this->sheet->setCellValue('A2', $subtitle." - [ ".$countItems." ITEMS ]");
+
+
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
 
-	private function setReportWithSectionNegativeRepeat($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D")
+	private function setReportWithSectionNegativeRepeat($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D", $subtitle)
 	{
 		$j = 4;
+		$countItems = 0;
 		$lastKey = $this->getLastArrayKey($header);
 		$alphabet = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 		$start = $alphabet[array_search($this->getItemDescriptionColumn($header), $alphabet) - 1];
@@ -1347,6 +1367,7 @@ class phpExcelExport extends Controller{
 		{
 			if($report[$i]['onhand'] < 0 && $report[$i]["SctNo"] != 184 && $report[$i]["UPC"] != $report[$i+1]["UPC"])
 			{
+				$countItems++;
 				if($increment == 0 || $condition != $report[$i]["SctNo"])
 				{
 					$this->sheet->mergeCells('A' . $j . ':' . $start . $j);
@@ -1422,6 +1443,7 @@ class phpExcelExport extends Controller{
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 		$this->sheet->getStyle($upc_col . "3:" . $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
+		$this->sheet->setCellValue('A2', $subtitle." - [ ".$countItems." ITEMS ]");
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
 

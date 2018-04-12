@@ -3,7 +3,6 @@
 <div class="container">
 	<div class="row signinrow">
 		<div class="col-md-4 col-md-offset-4">
-			
 			<form class="form-signin" action = '/csm/public/login' method = "POST">
 			    <h2 class="form-signin-heading">Please sign in</h2>
 			    <?php  
@@ -34,13 +33,9 @@
     				{
     					echo "<input type=\"checkbox\" name=\"rememberMe\">";
     				}
-
-
-
+                    
     				echo 'Remember me</label></div>';
 			    ?>
-
-			    
 			    <?= $data['error']; ?>
 			    <input type='submit' class="btn btn-lg btn-primary btn-block" value='Submit' name="submit">
 			</form>

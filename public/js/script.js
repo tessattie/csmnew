@@ -192,6 +192,7 @@ jQuery(function($){
 			alert("There are no vendor numbers with more than six digits. Try again.");
 		}
 	});
+	$(".haveToChange").html($(".countNumberToChange").html());
 
 	$("#department").click(function(){ 
 		var regex = /[0-9]/;

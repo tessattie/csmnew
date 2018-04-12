@@ -168,7 +168,7 @@ class home extends Controller{
 			$sectionReport = $this->brdata->get_multipleSectionReport($sections, $this->today, $_POST['mulfromsection'], $_POST['multosection']);
 			if(!empty($sectionReport[0]))
 			{
-				$title = '[ DPT'.$sectionReport[0]['DptNo'].' - '.$sectionReport[0]['DptName'].' ] - [ '.$exporturl.' ] - [ '.$this->from.' to '.$this->to.' ] - 
+				$title = '[ SCT '.$sectionReport[0]['SctNo'].' - '.$sectionReport[0]['SctName'].' ] - [ '.$exporturl.' ] - [ '.$this->from.' to '.$this->to.' ] - 
 				[ '.count($sectionReport).' ITEMS ]';
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
@@ -205,8 +205,8 @@ class home extends Controller{
 			$sectionReport = $this->brdata->get_multipleSectionNegReport($sections, $this->today, $_POST['mulfromsectionneg'], $_POST['multosectionneg']);
 			if(!empty($sectionReport[0]))
 			{
-				$title = '[ DPT'.$sectionReport[0]['DptNo'].' - '.$sectionReport[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - 
-				['.count($sectionReport).' ITEMS ]';
+				$title = '[ SCT '.$sectionReport[0]['SctNo'].' - '.$sectionReport[0]['SctName'].' ] - ['.$this->from.' to '.$this->to.'] - 
+				[<span class ="haveToChange">'.count($sectionReport).'</span> ITEMS ]';
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
 						  "title" => $title, "tableID" => "report_result", "action" => "section", "reportType" => 'templateWithSectionOrderNegativeRepeat', 
@@ -272,7 +272,7 @@ class home extends Controller{
 			$report = $this->brdata->get_vendorReport($_POST['vendorNegNumber'], $this->today, $_POST['fromNegvendor'], $_POST['toNegvendor']);
 			if(!empty($report[0]))
 			{
-				$title = '[VDR' . $_POST["vendorNegNumber"] . ' - '. $report[0]["VdrName"] . '] - [' . $this->from . ' to ' . $this->to . ']';				
+				$title = '[VDR' . $_POST["vendorNegNumber"] . ' - '. $report[0]["VdrName"] . '] - [' . $this->from . ' to ' . $this->to . '] - [<span class ="haveToChange">'.count($report).'</span> ITEMS]';				
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, "tableID" => "report_result", "action" => "vendor", "reportType" => 'templateWithSectionOrderNegative', "from" => $this->from, "to" => $this->to, "report" => $report, "menu" => $this->userRole);
 		}
@@ -593,6 +593,7 @@ class home extends Controller{
 	{
 		$data = array();
 		$title = "";
+		$exporturl = '';
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
 			"SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -602,17 +603,25 @@ class home extends Controller{
 		if(!empty($_POST['svendorNumber']) && !empty($_POST['sctvendorNumber']))
 		{
 			$_POST['svendorNumber'] = $this->completeValue($_POST['svendorNumber'], 6);
-			$_POST['sctvendorNumber'] = $this->completeValue($_POST['sctvendorNumber'], 4);
+			$sections = explode(",",$_POST['sctvendorNumber']);
+			for($i=0;$i<count($sections);$i++){
+				$sections[$i] = $this->completeValue($sections[$i], 4);
+				if($exporturl == ""){
+					$exporturl .=  $sections[$i];
+				}else{
+					$exporturl .= "_" . $sections[$i];
+				}
+			}
 			$this->setDefaultDates($_POST['fromvendorSection'], $_POST['tovendorSection']);
-			$this->exportURL = "/csm/public/phpExcelExport/vendorSection/".$_POST['svendorNumber'] . "/" . $_POST['sctvendorNumber'] . "/" . $this->from . "/" . $this->to;
-			$vdrSctReport = $this->brdata->get_vendorSectionReport($_POST['svendorNumber'], $_POST['sctvendorNumber'], $this->today, $_POST['tovendorSection'], $_POST['fromvendorSection']);
+			$this->exportURL = "/csm/public/phpExcelExport/vendorSection/".$_POST['svendorNumber'] . "/".$exporturl . "/" . $this->from . "/" . $this->to;
+			$vdrSctReport = $this->brdata->get_vendorSectionReport($_POST['svendorNumber'], $sections, $this->today, $_POST['tovendorSection'], $_POST['fromvendorSection']);
 			if(!empty($vdrSctReport[0]))
 			{
 				$title = '[DPT'.$vdrSctReport[0]['DptNo'].' - '.$vdrSctReport[0]['DptName'].'] - [VDR'.$_POST['svendorNumber'].' - '.$vdrSctReport[0]['VdrName'].'] - 
 				[SCT'.$_POST['sctvendorNumber'].' - '.$vdrSctReport[0]['SctName'].'] - ['.$this->from.' to '.$this->to.']  - ['.count($vdrSctReport).' ITEMS]';
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
-				"title" => $title, "tableID" => "report_result", "action" => "vendorSection", "reportType" => 'defaultTemplate', 
+				"title" => $title, "tableID" => "report_result", "action" => "vendorSection", "reportType" => 'templateWithSectionOrder', 
 				"from" => $this->from, "to" => $this->to, "report" => $vdrSctReport, "menu" => $this->userRole);
 		}
 		$this->renderView($data);
@@ -623,6 +632,7 @@ class home extends Controller{
 		$data = array();
 		$report = array();
 		$title = "";
+		$exporturl = '';
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
 			"SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -632,17 +642,25 @@ class home extends Controller{
 		if(!empty($_POST['svendorNegNumber']) && !empty($_POST['sctvendorNegNumber']))
 		{
 			$_POST['svendorNegNumber'] = $this->completeValue($_POST['svendorNegNumber'], 6);
-			$_POST['sctvendorNegNumber'] = $this->completeValue($_POST['sctvendorNegNumber'], 4);
+			$sections = explode(",",$_POST['sctvendorNegNumber']);
+			for($i=0;$i<count($sections);$i++){
+				$sections[$i] = $this->completeValue($sections[$i], 4);
+				if($exporturl == ""){
+					$exporturl .=  $sections[$i];
+				}else{
+					$exporturl .= "_" . $sections[$i];
+				}
+			}
 			$this->setDefaultDates($_POST['fromvendorNegSection'], $_POST['tovendorNegSection']);
-			$this->exportURL = "/csm/public/phpExcelExport/vendorSectionNegative/".$_POST['svendorNegNumber'] . "/" . $_POST['sctvendorNegNumber'] . "/" . $this->from . "/" . $this->to;
-			$report = $this->brdata->get_vendorSectionReport($_POST['svendorNegNumber'], $_POST['sctvendorNegNumber'], $this->today, $_POST['tovendorNegSection'], $_POST['fromvendorNegSection']);
+			$this->exportURL = "/csm/public/phpExcelExport/vendorSectionNegative/".$_POST['svendorNegNumber'] . "/" . $exporturl . "/" . $this->from . "/" . $this->to;
+			$report = $this->brdata->get_vendorSectionReport($_POST['svendorNegNumber'], $sections, $this->today, $_POST['tovendorNegSection'], $_POST['fromvendorNegSection']);
 			if(!empty($report[0]))
 			{
 				$title = '[DPT'.$report[0]['DptNo'].' - '.$report[0]['DptName'].'] - [VDR'.$_POST['svendorNegNumber'].' - '.$report[0]['VdrName'].'] - 
-				[SCT'.$_POST['sctvendorNegNumber'].' - '.$report[0]['SctName'].'] - ['.$this->from.' to '.$this->to.']  - ['.count($report).' ITEMS]';
+				[SCT'.$_POST['sctvendorNegNumber'].' - '.$report[0]['SctName'].'] - ['.$this->from.' to '.$this->to.']  - [<span class ="haveToChange">'.count($report).'</span> ITEMS]';
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
-				"title" => $title, "tableID" => "report_result", "action" => "vendorSection", "reportType" => 'defaultTemplateNegative', 
+				"title" => $title, "tableID" => "report_result", "action" => "vendorSection", "reportType" => 'templateWithSectionOrderNegative', 
 				"from" => $this->from, "to" => $this->to, "report" => $report, "menu" => $this->userRole);
 		}
 		$this->renderView($data);
@@ -695,7 +713,7 @@ class home extends Controller{
 			if(!empty($sectionReport[0]))
 			{
 				$title = '[DPT'.$sectionReport[0]['DptNo'].' - '.$sectionReport[0]['DptName'].'] - [SCT'.$_POST['sectionNegNumber'].' - '.$sectionReport[0]['SctName'].'] - ['.$this->from.' to '.$this->to.']
-				';
+				 - [<span class ="haveToChange">'.count($sectionReport).'</span> ITEMS]';
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
 				"title" => $title, "tableID" => "report_result", "action" => "sectionNegative", "reportType" => 'defaultTemplateNegative', 
@@ -750,7 +768,7 @@ class home extends Controller{
 			$departmentReport = $this->brdata->get_departmentNegativeReport($_POST['departmentNumber2'], $this->today, $_POST['fromdepartment2'], $_POST['todepartment2']);
 			if(!empty($departmentReport[0]))
 			{
-				$title = '[DPT'.$_POST['departmentNumber2'].'] - ['.$departmentReport[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($departmentReport).' ITEMS]';				
+				$title = '[DPT'.$_POST['departmentNumber2'].'] - ['.$departmentReport[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - [<span class ="haveToChange">'.count($departmentReport).'</span>  ITEMS]';				
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
 				"title" => $title, "tableID" => "report_result", "action" => "department", "reportType" => 'templateWithSectionOrderNegative', 
@@ -806,7 +824,7 @@ class home extends Controller{
 			$report = $this->brdata->get_vendorDepartmentReport($_POST['dvendorNumberNeg'], $_POST['dptvendorNumberNeg'], $this->today, $_POST['fromvendorDptNeg'], $_POST['tovendorDptNeg']);
 			if(!empty($report[0]))
 			{
-				$title = '[VDR'.$_POST['dvendorNumberNeg'].' - '.$report[0]['VdrName'].'] - [DPT'.$_POST['dptvendorNumberNeg'].' - '.$report[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - ['.count($report).' ITEMS]';				
+				$title = '[VDR'.$_POST['dvendorNumberNeg'].' - '.$report[0]['VdrName'].'] - [DPT'.$_POST['dptvendorNumberNeg'].' - '.$report[0]['DptName'].'] - ['.$this->from.' to '.$this->to.'] - [<span class ="haveToChange">'.count($report).'</span> ITEMS]';				
 			}
 			$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles, 
 				"title" => $title, "tableID" => "report_result", "action" => "vendorDepartment", "reportType" => 'templateWithSectionOrderNegative', 
