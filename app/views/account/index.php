@@ -1,7 +1,5 @@
-<?php include_once '/../header.php'; ?>
-
-<?php include_once '/../menu.php'; ?>
-
+<?php include_once 'C:/wamp/www/csm/app/views/header.php'; ?>
+<?php include_once 'C:/wamp/www/csm/app/views/menu.php'; ?>
 <div class="error"><?php echo $data['error']; ?></div>
 
 <?php  
@@ -13,4 +11,4 @@
 	}
 ?>
 
-<?php include_once '/../footer.php'; ?>
+<?php include_once 'C:/wamp/www/csm/app/views/footer.php'; ?>
