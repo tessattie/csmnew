@@ -50,8 +50,8 @@ class brdata{
 				RIGHT JOIN dbo.VendorCost vc ON vc.Vendor = v.Vendor
 				LEFT JOIN dbo.Price p ON p.UPC = vc.UPC
 				INNER JOIN dbo.Item i ON i.UPC = vc.UPC
-				INNER JOIN dbo.Departments d ON d.Department = i.Department
-				INNER JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
+				LEFT JOIN dbo.Departments d ON d.Department = i.Department
+				LEFT JOIN dbo.MajorDept md ON md.MajorDept = i.MajorDept
 				WHERE v.Vendor = '".$vendorNumber."' AND p.Store = '00000A' ".$this->condition."
 				ORDER BY i.Department, i.Description, i.SizeAlpha ASC, vc.Pack DESC;";
 		// Execute query

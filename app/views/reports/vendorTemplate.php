@@ -4,6 +4,7 @@ $increment = 0;
 $condition = 'ht' ;
 $elementCount = count($data['thead']);
 $tdCount = $elementCount - 4;
+$count = 0;
 if(!empty($data['report']) && $data['report'] != null && $data['report'] != false && count($data['report']) != 0)
 {
     echo "<thead class='thead_position'><tr>";
@@ -28,6 +29,7 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
 		}
     	if(floor($data['report'][$i]["onhand"] < 0))
     	{
+            $count++;
     		$onhandClass = "negative";
     	}
 
@@ -110,6 +112,8 @@ else
 ?>
 </tbody>
 </table>
+
+<span class= "countNumberToChange"><?= $count ?></span>
 </div>
 </div>
 </div>
