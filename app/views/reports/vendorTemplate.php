@@ -29,9 +29,13 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
 		}
     	if(floor($data['report'][$i]["onhand"] < 0))
     	{
-            $count++;
     		$onhandClass = "negative";
     	}
+
+        if(floor($data['report'][$i]["onhand"] < 0) && ($data['report'][$i]["UPC"] < '000020100000000' || $data['report'][$i]["UPC"] > '000020199900000') && ($data['report'][$i]["UPC"] < '000020200000000' || $data['report'][$i]["UPC"] > '000020299900000') && ($data['report'][$i]["UPC"] < '000020300000000' || $data['report'][$i]["UPC"] > '000020399900000'))
+        {
+            $count++;
+        }
 
         if(!empty($data['report'][$i]["lastReceiving"]))
         {

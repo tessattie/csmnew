@@ -39,6 +39,7 @@ class Controller{
 		{
 			require_once '../app/vendors/PHPExcel/Classes/PHPExcel.php';
 		}
+		PHPExcel_Cell::setValueBinder( new PHPExcel_Cell_AdvancedValueBinder() );
 		return new PHPExcel();
 	}
 

@@ -37,7 +37,7 @@ class phpExcelExport extends Controller{
 		$this->today = date('Y-m-d', strtotime("-1 days"));
 		$this->columnWidths = array("UPC" => 13, "VDR ITEM #" => 11, "BRAND" => 10, "ITEM DESCRIPTION" => 30, "PACK" => 6, "SIZE" => 8, 
 			"CASE COST" => 10, "RETAIL" => 7, "ON-HAND" => 8, "LAST REC" => 12, "ADJUSTMENT" => 12, "LAST REC DATE" => 15, "ADJUSTMENT DATE" => 15, "SALES" => 5, "VDR #" => 7, "VDR NAME" => 22, 
-			"TPR PRICE" => 7, "TPR START" => 8, "TPR END" => 8, "SCT NO" => 8, "SCT NAME" => 30, "DPT NO" => 8, "DPT NAME" => 30, "UNIT PRICE" => 10);
+			"TPR PRICE" => 7, "TPR START" => 15, "TPR END" => 15, "SCT NO" => 8, "SCT NAME" => 30, "DPT NO" => 8, "DPT NAME" => 30, "UNIT PRICE" => 10);
 		$this->columns = array("UPC" => "UPC", "VDR ITEM #" => "CertCode", "BRAND" => "Brand", "ITEM DESCRIPTION" => "ItemDescription", "PACK" => "Pack", "SIZE" => "SizeAlpha", "CASE COST" => "CaseCost", "RETAIL" => "Retail", 
 			"ON-HAND" => "onhand", "LAST REC" => "lastReceiving", "LAST REC DATE" => "lastReceivingDate", "SALES" => "sales", "VDR #" => "VdrNo", "VDR NAME" => "VdrName", "TPR PRICE" => "tpr", "TPR START" => "tprStart", 
 			"TPR END" => "tprEnd", "SCT NO" => "SctNo", "SCT NAME" => "SctName", "DPT NO" => "DptNo", "DPT NAME" => "DptName", "UNIT PRICE" => "unitPrice", "ADJUSTMENT" => "adj", "ADJUSTMENT DATE" => "Date");
@@ -1038,7 +1038,7 @@ class phpExcelExport extends Controller{
 				}
 		        else
 		        {
-		        	$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+		        	$this->sheet->setCellValue($key . $j, ltrim($report[$i][$this->columns[$value]], "0"));
 		        }
 		        if($this->columns[$value] == "CertCode")
 				{
@@ -1070,7 +1070,12 @@ class phpExcelExport extends Controller{
 						    ->getColor()->setRGB('0066CC');
 		}
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		$this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
+		// $this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->setFormatCode('00000');
+		// $this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->applyFromArray(
+		// 		array(
+		// 		'code' => PHPExcel_Style_NumberFormat::	FORMAT_NUMBER
+		// 		)
+		// 		);
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
@@ -1115,11 +1120,17 @@ class phpExcelExport extends Controller{
 						}
 				        else
 				        {
-				        	$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+				        	$this->sheet->setCellValue($key . $j, ltrim($report[$i][$this->columns[$value]], "0"));
+				        	$numlength = strlen(ltrim($report[$i][$this->columns[$value]], '0'));
+	        				$zeros = '';
+	        				for($p=0;$p<$numlength;$p++){
+	        					$zeros.='0';
+	        				}
+	        				$this->sheet->getStyle($key . $j)->getNumberFormat()->setFormatCode($zeros);
 				        }
 				        if($this->columns[$value] == "CertCode")
 						{
-							$this->sheet->setCellValue($key . $j, trim($report[$i][$this->columns[$value]]));
+							$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
 						}
 				        if($value == "ON-HAND")
 				        {
@@ -1149,7 +1160,7 @@ class phpExcelExport extends Controller{
 						    ->getColor()->setRGB('0066CC');
 		}
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		$this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
+		// $this->sheet->getStyle($upc_col."3:". $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
 
 		$this->sheet->setCellValue('A2', $subtitle." - [ ".$countItems." ITEMS ]");
@@ -1214,14 +1225,25 @@ class phpExcelExport extends Controller{
 			        				$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
 			        			}
 			        		}else{
-			        			$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+			        			if($value == "UPC"){
+			        				$this->sheet->setCellValue($key . $j, ltrim($report[$i][$this->columns[$value]], '0'));
+			        				$numlength = strlen(ltrim($report[$i][$this->columns[$value]], '0'));
+			        				$zeros = '';
+			        				for($p=0;$p<$numlength;$p++){
+			        					$zeros.='0';
+			        				}
+			        				$this->sheet->getStyle($key . $j)->getNumberFormat()->setFormatCode($zeros);
+			        			}else{
+			        				$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+			        			}
+			        			
 			        		}
 			        	}
 			        }
 				}
 		        if($this->columns[$value] == "CertCode")
 				{
-					$this->sheet->setCellValue($key . $j, trim($report[$i][$this->columns[$value]]));
+					$this->sheet->setCellValue($key . $j, str_replace(" ", "", $report[$i][$this->columns[$value]]));
 				}
 		        if($value == "ON-HAND")
 		        {
@@ -1249,7 +1271,8 @@ class phpExcelExport extends Controller{
 		$this->sheet->getStyle("A1:" . $lastKey . $j) ->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 		$this->sheet->getStyle("A3:" . $lastKey . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->sheet->getStyle($itemDescription."3:" . $itemDescription . $j)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		$this->sheet->getStyle($upc_col . "3:" . $upc_col . $j)->getNumberFormat()->setFormatCode('0000000000000');
+		
+		// $this->sheet->getStyle('A1')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1); 
 		$styleArray = array( 'borders' => array( 'allborders' => array( 'style' => PHPExcel_Style_Border::BORDER_THIN, 'color' => array('rgb' => '000000'), ), ), ); 
 		$this->phpExcel->getActiveSheet()->getStyle('A1:'.$lastKey.$j)->applyFromArray($styleArray);
 	}
@@ -1308,7 +1331,11 @@ class phpExcelExport extends Controller{
 				        	}
 				        	else
 				        	{
-				        		$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+				        		if($value == "UPC"){
+			        				$this->sheet->setCellValue($key . $j, ltrim($report[$i][$this->columns[$value]], '0'));
+			        			}else{
+			        				$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+			        			}
 				        	}
 				        }
 					}
@@ -1406,7 +1433,11 @@ class phpExcelExport extends Controller{
 				        	}
 				        	else
 				        	{
-				        		$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+				        		if($value == "UPC"){
+			        				$this->sheet->setCellValue($key . $j, ltrim($report[$i][$this->columns[$value]], '0'));
+			        			}else{
+			        				$this->sheet->setCellValue($key . $j, $report[$i][$this->columns[$value]]);
+			        			}
 				        	}
 				        }
 					}
