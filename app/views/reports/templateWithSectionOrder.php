@@ -4,6 +4,7 @@ $increment = 0;
 $condition = 'ht' ;
 $elementCount = count($data['thead']);
 $tdCount = $elementCount - 4;
+$count = 0;
 if(!empty($data['report']) && $data['report'] != null && $data['report'] != false && count($data['report']) != 0)
 {
     echo "<thead class='thead_position'><tr>";
@@ -29,6 +30,12 @@ if(!empty($data['report']) && $data['report'] != null && $data['report'] != fals
     	{
     		$onhandClass = "negative";
     	}
+
+        if(floor($data['report'][$i]["onhand"] < 0) && ($data['report'][$i]["UPC"] < '000020100000000' || $data['report'][$i]["UPC"] > '000020199900000') && ($data['report'][$i]["UPC"] < '000020200000000' || $data['report'][$i]["UPC"] > '000020299900000') && ($data['report'][$i]["UPC"] < '000020300000000' || $data['report'][$i]["UPC"] > '000020399900000'))
+        {
+            $count++;
+        }
+
 
         if(!empty($data['report'][$i]["lastReceiving"]))
         {
@@ -109,6 +116,9 @@ else
 ?>
 </tbody>
 </table>
+
+<span class= "countNumberToChange"><?= $count ?></span>
+
 </div>
 </div>
 </div>
