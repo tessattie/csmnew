@@ -1,10 +1,10 @@
 jQuery(function($){
-
+	alert(autoc);
 	$('#test').BootSideMenu({
             side: "left", 
-            pushBody:false,
-            remember:false,
-            autoClose:true,
+            pushBody:push,
+            remember:rem,
+            autoClose:autoc,
             closeOnClick: false
         });
 

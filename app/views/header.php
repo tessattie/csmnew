@@ -19,6 +19,19 @@
             text-align: center;
         }
     </style>
+    <?php if($_SESSION['csm']['id'] == 15) : ?>
+    	<script type="text/javascript">
+    	var push = false;
+    	var rem = false;
+    	var autoc = true;
+    	</script>
+    <?php else : ?>
+    	<script type="text/javascript">
+    	var push = true;
+    	var rem = true;
+    	var autoc = false;
+    	</script>
+    <?php endif; ?>
 </head>
 <body>
 <div class="container-fluid">
