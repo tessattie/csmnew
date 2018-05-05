@@ -130,6 +130,13 @@
         <input type='hidden' name = 'todepartment' id = 'todepartment'>
     </form>
 
+    <a href="#" id="department2" class="list-group-item">Department Negative for Inventory</a>
+    <form method = 'POST' action = '/csm/public/home/departmentNegative' name='departmentform2' id = 'departmentform2'>
+        <input type='hidden' name = 'departmentNumber2' id = 'departmentNumber2'>
+        <input type='hidden' name = 'fromdepartment2' id = 'fromdepartment2'>
+        <input type='hidden' name = 'todepartment2' id = 'todepartment2'>
+    </form>
+
   <a href="#" id="upcRange" class="list-group-item">UPC Range</a>
     <form method = 'POST' action = '/csm/public/home/UPCRange' name='upcRangeform' id = 'upcRangeform'>
         <input type='hidden' name = 'upcRangeNo1' id = 'upcRangeNo1'>
@@ -148,10 +155,5 @@
     </form>
 
 
-    <a href="#" id="department2" class="list-group-item">Department Negative for Inventory</a>
-    <form method = 'POST' action = '/csm/public/home/departmentNegative' name='departmentform2' id = 'departmentform2'>
-        <input type='hidden' name = 'departmentNumber2' id = 'departmentNumber2'>
-        <input type='hidden' name = 'fromdepartment2' id = 'fromdepartment2'>
-        <input type='hidden' name = 'todepartment2' id = 'todepartment2'>
-    </form>
+    
     </div>
