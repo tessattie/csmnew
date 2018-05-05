@@ -1,5 +1,4 @@
 jQuery(function($){
-	alert(autoc);
 	$('#test').BootSideMenu({
             side: "left", 
             pushBody:push,

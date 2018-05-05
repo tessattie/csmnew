@@ -1392,6 +1392,7 @@ class phpExcelExport extends Controller{
 		$condition = 'ht';
 		for ($i=0; $i<count($report); $i++)
 		{
+			if(!empty($report[$i+1]["UPC"])){
 			if($report[$i]['onhand'] < 0 && $report[$i]["SctNo"] != 184 && $report[$i]["UPC"] != $report[$i+1]["UPC"])
 			{
 				$countItems++;
@@ -1457,6 +1458,7 @@ class phpExcelExport extends Controller{
 				$j = $j + 1;
 				$increment = 1;
 			}
+		}
 		}
 		$j = $j - 1;
 		$this->sheet->getStyle('A3:'.$lastKey.$j)->getFont()->setSize(8);

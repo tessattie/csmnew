@@ -205,27 +205,6 @@ class home extends Controller{
 
 	public function multipleSectionsNegURL($sections)
 	{
-		// $data = array();
-		// $title = "";
-		// $report = null;
-		// $theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
-		// 	"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE");
-		// $queryTitles = array("UPC", "CertCode", "Brand", "ItemDescription", "Pack", "SizeAlpha",
-		// 	"CaseCost", "Retail", "onhand", "lastReceiving", "lastReceivingDate", "sales", "tpr", "tprStart", "tprEnd");
-		// if(!empty($vendor))
-		// {
-		// 	$_POST['vendorNegNumber'] = $this->completeValue($vendor, 6);
-		// 	$this->exportURL = "/csm/public/phpExcelExport/vendorNegative/".$vendor . "/" . $this->from . "/" . $this->to;
-		// 	$report = $this->brdata->get_vendorReport($vendor, $this->today, $this->from, $this->to);
-		// 	if(!empty($report[0]))
-		// 	{
-		// 		$title = '[VDR' . $_POST["vendorNegNumber"] . ' - '. $report[0]["VdrName"] . '] - [' . $this->from . ' to ' . $this->to . '] - [<span class ="haveToChange">'.count($report).'</span> ITEMS]';				
-		// 	}
-		// 	$data = array("class" => $this->classname, "exportURL" => $this->exportURL, "qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, "tableID" => "report_result", "action" => "vendor", "reportType" => 'templateWithSectionOrderNegative', "from" => $this->from, "to" => $this->to, "report" => $report, "menu" => $this->userRole);
-		// }
-		// $this->renderView($data);
-
-
 		$data = array();
 		$title = "";
 		$report = null;
@@ -249,7 +228,7 @@ class home extends Controller{
 			}
 			// $this->setDefaultDates($_POST['mulfromsectionneg'], $_POST['multosectionneg']);
 			$this->exportURL = "/csm/public/phpExcelExport/multipleSectionsNeg/".$exporturl . "/" . $this->from . "/" . $this->to;
-			$sectionReport = $this->brdata->get_multipleSectionReport($sections, $this->today, $this->from, $this->to);
+			$sectionReport = $this->brdata->get_multipleSectionNegReport($sections, $this->today, $this->from, $this->to);
 			if(!empty($sectionReport[0]))
 			{
 				$title = '[ SCT '.$sectionReport[0]['SctNo'].' - '.$sectionReport[0]['SctName'].' ] - ['.$this->from.' to '.$this->to.'] - 

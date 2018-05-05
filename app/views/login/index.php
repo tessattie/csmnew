@@ -1,4 +1,4 @@
-<?php include_once 'C:/wamp/www/csm/app/views/header.php'; ?>
+<?php include_once 'C:/wamp/www/csm/app/views/headerLogin.php'; ?>
 
 <div class="container">
 	<div class="row signinrow">
