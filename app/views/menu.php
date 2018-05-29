@@ -65,8 +65,8 @@
     <div class = "col-md-5 salescol">
       <form class = "form-inline salesdiv">
       <label class="filAriann">Sales dates :</label>
-              <input type="date" class="form-control" name = 'fromdate' class = 'dates' id = 'fromdate' value = "<?= $data['from']; ?>">
-              <input type="date" class="form-control" name = 'todate' class = 'dates' id = 'todate' value = "<?= $data['to']; ?>">
+              <input type="date" class="form-control" name = 'fromdate' class = 'dates' id = 'fromdate' value = "<?= $_COOKIE["from"]; ?>">
+              <input type="date" class="form-control" name = 'todate' class = 'dates' id = 'todate' value = "<?= $_COOKIE["to"]; ?>">
             </form>
     </div>
   </div>

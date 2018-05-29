@@ -84,7 +84,7 @@ class home extends Controller{
 
 	public function vendor()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -105,6 +105,7 @@ class home extends Controller{
 				}
 			}
 			$_POST['vendorNumber'] = $this->completeValue($_POST['vendorNumber'], 6);
+			// var_dump($_POST['vendorNumber']);
 			$this->setDefaultDates($_POST['fromvendor'], $_POST['tovendor']);
 			$this->exportURL = "/csm/public/phpExcelExport/vendor/" .$_POST['vendorNumber']. "/" . $this->from . "/" . $this->to;
 			$vendorReport = $this->brdata->get_vendorReport($_POST['vendorNumber'], $this->today, $_POST['fromvendor'], $_POST['tovendor']);
@@ -122,7 +123,7 @@ class home extends Controller{
 
 	public function vendorNegativeURL($vendor)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$report = null;
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
@@ -144,7 +145,7 @@ class home extends Controller{
 	}
 
 	public function limitedVendor(){
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "ITEM DESCRIPTION", "PK", "SIZE",
 			"RETAIL", "ON-HAND");
@@ -167,7 +168,7 @@ class home extends Controller{
 
 	public function multipleSections()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -205,7 +206,7 @@ class home extends Controller{
 
 	public function multipleSectionsNegURL($sections)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$report = null;
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
@@ -224,7 +225,6 @@ class home extends Controller{
 				}else{
 					$exporturl .= "_" . $sections[$i];
 				}
-				
 			}
 			// $this->setDefaultDates($_POST['mulfromsectionneg'], $_POST['multosectionneg']);
 			$this->exportURL = "/csm/public/phpExcelExport/multipleSectionsNeg/".$exporturl . "/" . $this->from . "/" . $this->to;
@@ -243,7 +243,7 @@ class home extends Controller{
 
 	public function multipleSectionsNeg()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -261,7 +261,6 @@ class home extends Controller{
 				}else{
 					$exporturl .= "_" . $sections[$i];
 				}
-				
 			}
 			$this->setDefaultDates($_POST['mulfromsectionneg'], $_POST['multosectionneg']);
 			$this->exportURL = "/csm/public/phpExcelExport/multipleSectionsNeg/".$exporturl . "/" . $this->from . "/" . $this->to;
@@ -292,7 +291,7 @@ class home extends Controller{
 
 	public function UPCReceivingHistory()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -320,7 +319,7 @@ class home extends Controller{
 
 	public function vendorNegative()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$report = null;
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
@@ -344,7 +343,7 @@ class home extends Controller{
 
 	public function sectionMovement()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -389,7 +388,7 @@ class home extends Controller{
 
 	public function specials()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "TPR REPORT";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
 			"CASE COST", "UNIT PRICE", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE", "VDR NO", "VDR NAME");
@@ -403,7 +402,7 @@ class home extends Controller{
 
 	public function vendorMovement()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$report = null;
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
@@ -444,7 +443,7 @@ class home extends Controller{
 
 	public function departmentMovement()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$report = null;
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
@@ -488,7 +487,7 @@ class home extends Controller{
 
 	public function vendorSectionMovement()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -534,7 +533,7 @@ class home extends Controller{
 
 	public function vendor_url($vendor)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -555,7 +554,7 @@ class home extends Controller{
 
 	public function vendorPriceCompare()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "Vendor price compare";
 		$theadTitles = array("UPC", "BRAND", "ITEM DESCRIPTION", "ON-HAND", "SALES", "TPR PRICE", "TPR START DATE", 
 			"TPR END DATE", "PACK", "SIZE", "CASE COST", "UNIT PRICE", "RETAIL", "ITEM #", "LAST REC", "LAST REC DATE", "VDR NO", "VDR NAME");
@@ -573,15 +572,16 @@ class home extends Controller{
 			{
 				$title = '[VENDOR PRICE COMPARE : '.$vendorReport[0]['VdrNameOne'].' - '.$vendorReport[0]['VdrNameTwo'].'] - ['.count($vendorReport).' ITEMS]';
 			}
-		}
-		$this->view('home', array("qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, 'active' => "vendorPriceCompare", 
+			$data = array("qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, 'active' => "vendorPriceCompare", 
 			"class" => $this->classname, "exportURL" => $this->exportURL, "tableID" => "report_results", "action" => "priceCompare", 
-			"reportType" => 'templateCompare',"from" => $this->from, "to" => $this->to, "report" => $vendorReport, "menu" => $this->userRole));
+			"reportType" => 'templateCompare',"from" => $this->from, "to" => $this->to, "report" => $vendorReport, "menu" => $this->userRole);
+		}
+		$this->view('home', $data);
 	}
 
 	public function sectionPriceCompare()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "Section price compare";
 		$theadTitles = array("UPC", "BRAND", "ITEM DESCRIPTION", "ON-HAND", "SALES", "TPR PRICE", "TPR START DATE", 
 			"TPR END DATE", "PACK", "SIZE", "CASE COST", "UNIT PRICE", "RETAIL", "ITEM #", "LAST REC", "LAST REC DATE", "VDR NO", "VDR NAME");
@@ -600,15 +600,16 @@ class home extends Controller{
 			{
 				$title = '[VENDOR SECTION PRICE COMPARE : '.$sectionReport[0]['VdrNameOne'].' - '.$sectionReport[0]['VdrNameTwo'].'] - [SECTION ' . $sectionReport[0]['SctName'] . '] - ['.count($sectionReport).' ITEMS]';
 			}
-		}
-		$this->view('home', array("qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, 'active' => "sectionPriceCompare", 
+			$data = array("qt" => $queryTitles, "thead" => $theadTitles , "title" => $title, 'active' => "sectionPriceCompare", 
 			"class" => $this->classname, "exportURL" => $this->exportURL, "tableID" => "report_results", "action" => "sectionCompare", 
-			"reportType" => 'templateCompare',"from" => $this->from, "to" => $this->to, "report" => $sectionReport, "menu" => $this->userRole));
+			"reportType" => 'templateCompare',"from" => $this->from, "to" => $this->to, "report" => $sectionReport, "menu" => $this->userRole);
+		}
+		$this->view('home', $data);
 	}
 
 	public function UPCRange()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
 			"VDR #", "VDR NAME", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -632,7 +633,7 @@ class home extends Controller{
 
 	public function itemDescription()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
 			"SALES", "VDR #", "VDR NAME", "TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -654,7 +655,7 @@ class home extends Controller{
 
 	public function vendorSection()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$exporturl = '';
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
@@ -693,7 +694,7 @@ class home extends Controller{
 
 	public function vendorSectionNegative()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$report = array();
 		$title = "";
 		$exporturl = '';
@@ -732,7 +733,7 @@ class home extends Controller{
 
 	public function vendorSectionNegativeURL($vendor, $section)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$report = array();
 		$title = "";
 		$exporturl = '';
@@ -770,7 +771,7 @@ class home extends Controller{
 
 	public function section()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -798,7 +799,7 @@ class home extends Controller{
 
 	public function sectionNegative()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -826,7 +827,7 @@ class home extends Controller{
 
 	public function department()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
@@ -854,7 +855,7 @@ class home extends Controller{
 
 	public function departmentNegative()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
@@ -881,7 +882,7 @@ class home extends Controller{
 
 	public function vendorDepartment()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -911,7 +912,7 @@ class home extends Controller{
 
 	public function vendorDepartmentNegativeURL($vendor, $department)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -940,7 +941,7 @@ class home extends Controller{
 
 	public function vendorDepartmentNegative()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$title = "";
 		$theadTitles = array("UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", 
@@ -968,7 +969,7 @@ class home extends Controller{
 
 	public function UPCPriceCompare()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("VDR #", "VDR NAME", "UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "UNIT PRICE", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
 			"TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -990,7 +991,7 @@ class home extends Controller{
 
 	public function UPCPriceCompare_url($upc)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("VDR #", "VDR NAME", "UPC", "ITEM #", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "UNIT PRICE", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", "TPR PRICE",
 		    "TPR START DATE", "TPR END DATE");
@@ -1010,7 +1011,7 @@ class home extends Controller{
 
 	public function vendorItemCode()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("VDR #", "VDR NAME", "UPC", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
 			"TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -1031,7 +1032,7 @@ class home extends Controller{
 
 	public function vendorItemCode_url($itemCode)
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("VDR #", "VDR NAME", "UPC", "BRAND", "ITEM DESCRIPTION", "PACK", "SIZE",
 			"CASE COST", "RETAIL", "ON-HAND", "LAST REC", "LAST REC DATE", "SALES", 
 			"TPR PRICE", "TPR START DATE", "TPR END DATE");
@@ -1051,7 +1052,7 @@ class home extends Controller{
 
 	public function vendorNames()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$this->classname = "liststable";
 		$theadTitles = array("VDR #", "VDR NAME");
 		$queryTitles = array("VdrNo", "VdrName");
@@ -1067,7 +1068,7 @@ class home extends Controller{
 
 	public function sectionNames()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$this->classname = "liststable";
 		$theadTitles = array("DPT NO", "DPT NAME", "SCT NO", "SCT NAME");
 		$queryTitles = array("DptNo", "DptName", "SctNo", "SctName");
@@ -1082,7 +1083,7 @@ class home extends Controller{
 
 	public function departmentNames()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$this->classname = "liststable";
 		$theadTitles = array("DPT NO", "DPT NAME");
 		$queryTitles = array("DptNo", "DptName");
@@ -1097,7 +1098,7 @@ class home extends Controller{
 
 	public function adjustments()
 	{
-		$data = array();
+		$data = array("exportURL" => $this->exportURL, "from" => $this->from, "to" => $this->to, "menu" => $this->userRole);
 		$theadTitles = array("UPC", "ITEM DESCRIPTION", "SECTION NO", "SECTION NAME","LAST RECEIVING", "LAST RECEIVING DATE", "ADJUSTMENT", "ADJUSTMENT DATE");
 		$queryTitles = array("UPC", "ItemDescription", "SctNo", "SctName", "lastReceiving", "lastReceivingDate", "adj", "Date");
 		$this->exportURL = "/csm/public/phpExcelExport/adjustments";

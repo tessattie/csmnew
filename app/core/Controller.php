@@ -11,7 +11,7 @@ class Controller{
 	{
 		$this->roles = array(0 => "menuAdm", 1 => "menuAdmin", 2 => "menuOne", 3 => "menuTwo", 4 => "menuZero", 10 => "menuFive");
 		$this->userRole = $this->setRole();
-
+		$_SESSION['csm']['userrole'] = $this->setRole();
 		$this->logs = $this->model('log');
 	}
 

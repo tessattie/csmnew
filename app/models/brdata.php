@@ -145,7 +145,7 @@ class brdata{
 				LEFT JOIN dbo.Vendors v ON v.Vendor = vc.Vendor
 				INNER JOIN dbo.Departments d ON d.Department = i.Department
 				WHERE i.Description LIKE '%".$itemDescription."%' 
-				ORDER BY i.Department, vc.Pack, vc.Vendor;";
+				 ORDER BY i.Department, vc.Pack, vc.Vendor";
 
 		// Execute query
 		$results = $this->db->query($SQL);

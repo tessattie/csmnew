@@ -1,6 +1,6 @@
 </div>
 <div id="test">
-<?php include $data['menu'].".php"; ?>
+<?php include $_SESSION['csm']['userrole'].".php"; ?>
 </div>
 <!--/Test -->
 
