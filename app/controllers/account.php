@@ -33,7 +33,7 @@ class account extends Controller{
 		{
 			foreach($_POST AS $key => $value)
 			{
-				if(empty($value) || $key == 'vendors')
+				if(empty($value) && $key != 'vendors')
 				{
 					$users = $this->users->getUsers();
 					$errormessage = "<p class='bg-danger'>You must complete all the fields</p>";
