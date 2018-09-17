@@ -1170,6 +1170,7 @@ class phpExcelExport extends Controller{
 
 	private function setReportWithSection($header, $report, $bold, $upc_col = "A", $unit_price_col = "", $itemDescription = "D")
 	{
+		error_reporting(E_ERROR | E_PARSE);
 		$j = 4;
 		$lastKey = $this->getLastArrayKey($header);
 		$alphabet = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
