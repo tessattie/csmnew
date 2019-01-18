@@ -1,18 +1,9 @@
 <?php
 class Controller{
 
-	private $roles;
-
-	protected $userRole;
-
-	protected $log;
-
 	public function __construct()
 	{
-		$this->roles = array(0 => "menuAdm", 1 => "menuAdmin", 2 => "menuOne", 3 => "menuTwo", 4 => "menuZero", 10 => "menuFive");
-		$this->userRole = $this->setRole();
-		$_SESSION['csm']['userrole'] = $this->setRole();
-		$this->logs = $this->model('log');
+		
 	}
 
 	public function model($model)
@@ -59,29 +50,8 @@ class Controller{
 	{
 		if(!isset($_SESSION['csm']['id']))
 		{
-			header('Location: /csm/public/login');
+			header('Location: /caisses/public/login');
 		}
 	}
 
-	public function setRole()
-	{
-		$role = "";
-		if(isset($_SESSION['csm']['role']))
-		{
-			$role = $this->roles[$_SESSION['csm']['role']];
-		}
-		else
-		{
-			if(!isset($_SESSION['csm']['id']))
-			{
-				header('Location: /csm/public/login');
-			}
-		}
-		return $role;
-	}
-
-	public function saveLog($action)
-	{
-		$this->logs->saveLog($date, 1, $action);
-	}
 }

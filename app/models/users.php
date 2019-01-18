@@ -6,8 +6,8 @@ class users{
 
 	public function __construct()
 	{
-		$server_name = 'HOST-STORE\MSSQLSERVER2017';
-		$this->db = new PDO( "sqlsrv:server=".$server_name." ; Database = users", "sa", "BRd@t@123");
+		$server_name = 'TESS';
+		$this->db = new PDO( "sqlsrv:server=".$server_name." ; Database = caribbean", "tess", "minimi");
 	}
 
 	public function getUsers()
